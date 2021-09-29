@@ -29,3 +29,4 @@ if lampara_1_living.getFoco() == True:
 else:
     print('Foco Apagado')
 # Edit
+# Prog
