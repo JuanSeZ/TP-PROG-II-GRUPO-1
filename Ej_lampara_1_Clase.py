@@ -28,3 +28,4 @@ if lampara_1_living.getFoco() == True:
     print('Foco encendido')
 else:
     print('Foco Apagado')
+# Edit
