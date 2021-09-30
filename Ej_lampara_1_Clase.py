@@ -23,6 +23,8 @@ print('la marca del foco es: ',lampara_1_living.getMarca())
 lampara_1_living.prender()
 #lampara_1_living.apagar()
 print("Hola")
+#aver
+
 
 if lampara_1_living.getFoco() == True:
     print('Foco encendido')
