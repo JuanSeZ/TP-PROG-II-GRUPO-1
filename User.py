@@ -44,3 +44,11 @@ class citizen(user):
     def reject_friend_request(self, citizen):
         #Debe quitar de la lista de solicitudes al ciudadano y agregarle un strike
         pass
+
+class sensor:
+    def __init__(self, event_type):
+        self.event_type = event_type
+    
+    def report_event(self):
+        #Debe crear una instancia de la clase 'evento', del tipo que tiene prestablecido el sensor
+        pass
