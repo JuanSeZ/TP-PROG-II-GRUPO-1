@@ -1,9 +1,10 @@
 from abc import ABC
 
 class user(ABC):
-    def __init__(self, cuil, cellphone):
+    def __init__(self, cuil, cellphone, password):
         self.cuil = cuil
         self.cellphone = cellphone
+        self.password = password
 
     def report_event(self, type):
         #Debe crear una instancia de la clase 'evento', con un tipo especifico
