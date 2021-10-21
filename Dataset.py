@@ -1,7 +1,8 @@
 #Dataset ficticio de ANSES que verifica si los cuidadanos se registran con datos veridicos
-Juan Perez: 145, 9432
-Miguel Rulo: 390, 0012
-Lucas Nelo: 245, 7003
-Nilda Russo: 590, 6549
-Miriam Orne: 220, 1122
-Juliana Aguo: 798, 0139
+#Con el fin de poder utilizar la bilbioteca csv para la comparación de datos, se escribe el nombre y apellido primero, el celular después y por último el cuil.
+Juan Perez,145,9432
+Miguel Rulo,390,0012
+Lucas Nelo,245,7003
+Nilda Russo,590,6549
+Miriam Orne,220,1122
+Juliana Aguo,798,0139
