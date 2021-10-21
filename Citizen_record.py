@@ -14,6 +14,7 @@ class citizen_record:
         with open ("Dataset.csv") as f:
             reader = csv.reader(f)
             for row in reader:
+                #La primer parte del if, compara con el cuil, la segunda parte del if, compara con el teléfono.
                 if ("{0}".format(row[2])) == str(citizen.cuil) and ("{0}".format(row[1])) == str(citizen.cellphone):
                     __class__.citizen_list.append(citizen)
 
