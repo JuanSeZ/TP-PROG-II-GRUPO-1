@@ -1,5 +1,4 @@
 from abc import ABC
-from Citizen_record import citizen_record
 import unittest
 
 class user(ABC):
