@@ -12,8 +12,9 @@ class citizen_record:
 
     def validate_registration(Cuil, phone_number):
         #Debe ver si los datos ingresados concuerdan con datos en el Dataset de Anses
-        with open ("Dataset.csv") as f:
+        with open("Dataset.csv") as f:
             reader = csv.reader(f)
+            next(reader)
             for row in reader:
                 #La primer parte del if, compara con el cuil, la segunda parte del if, compara con el teléfono.
                 if ("{0}".format(row[2])) == str(Cuil) and ("{0}".format(row[1])) == str(phone_number):
@@ -30,9 +31,8 @@ class citizen_record:
 
 class test_user(unittest.TestCase):
 
-    def test_dataset(self):
-        citizen_record.register_citizen(9432, 'hola', 145)
-        self.assertEqual(citizen_record.citizen_list[0].get_cuil(), 9432)
-
+    def test_validate_data_set(self):
+        x = citizen_record.validate_registration(9432,145)
+        self.assertEqual(x, True)
 if __name__ == '__main__':
     unittest.main()
