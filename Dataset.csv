@@ -1,5 +1,4 @@
-#Dataset ficticio de ANSES que verifica si los cuidadanos se registran con datos veridicos
-#Con el fin de poder utilizar la bilbioteca csv para la comparación de datos, se escribe el nombre y apellido primero, el celular después y por último el cuil.
+Nombre y Apellido, celular, cuil:
 Juan Perez,145,9432
 Miguel Rulo,390,0012
 Lucas Nelo,245,7003
