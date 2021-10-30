@@ -34,5 +34,6 @@ class test_user(unittest.TestCase):
     def test_validate_data_set(self):
         x = citizen_record.validate_registration(9432,145)
         self.assertEqual(x, True)
+
 if __name__ == '__main__':
     unittest.main()
