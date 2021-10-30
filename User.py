@@ -80,6 +80,10 @@ class citizen(user):
 
     def get_unbanned(self):
         self.strikes = 0
+        
+    def report_citizen(self, other_citizen):
+        # Adds strike al ciudadano reportado
+        other_citizen.add_strike()
 
 class sensor:
     def __init__(self, event_type):
@@ -123,6 +127,14 @@ class test_user(unittest.TestCase):
         self.assertEqual(len(citizen_2.get_friend_requests()), 0)
         self.assertEqual(citizen_1.get_strikes(), 1)
         
-
+    def test_report_citizen(self):
+        citizen_1 = citizen(1, 123)
+        citizen_2 = citizen(2, 456)
+        citizen_1.report_citizen(citizen_2)
+        self.assertEqual(citizen_2.get_strikes(), 1)
+        citizen_1.report_citizen(citizen_2)
+        self.assertEqual(citizen_2.get_strikes(), 2)
+        
+        
 if __name__ == '__main__':
     unittest.main()
