@@ -5,16 +5,16 @@ import unittest
 class test_user(unittest.TestCase):
 
     def test_send_friend_request(self):
-        citizen_1 = citizen(1, 123)
-        citizen_2 = citizen(2, 456)
+        citizen_1 = citizen(1, 123, 1)
+        citizen_2 = citizen(2, 456, 1)
 
         citizen_1.send_friend_request(citizen_2)
         self.assertEqual(citizen_2.get_friend_requests()[0], citizen_1)
 
     def test_accept_friend_request(self):
-        citizen_1 = citizen(1, 123)
-        citizen_2 = citizen(2, 456)
-        citizen_3 = citizen(3, 789)
+        citizen_1 = citizen(1, 123, 1)
+        citizen_2 = citizen(2, 456, 1)
+        citizen_3 = citizen(3, 789, 1)
 
         citizen_1.send_friend_request(citizen_2)
         citizen_3.send_friend_request(citizen_2)
@@ -23,9 +23,9 @@ class test_user(unittest.TestCase):
         self.assertEqual(citizen_2.get_friend_list()[0], citizen_3)
 
     def test_reject_friend_request(self):
-        citizen_1 = citizen(1, 123)
-        citizen_2 = citizen(2, 456)
-        citizen_3 = citizen(3, 789)
+        citizen_1 = citizen(1, 123, 1)
+        citizen_2 = citizen(2, 456, 1)
+        citizen_3 = citizen(3, 789, 1)
 
         citizen_1.send_friend_request(citizen_2)
         citizen_3.send_friend_request(citizen_2)
@@ -36,8 +36,8 @@ class test_user(unittest.TestCase):
         self.assertEqual(citizen_1.get_strikes(), 1)
 
     def test_report_citizen(self):
-        citizen_1 = citizen(1, 123)
-        citizen_2 = citizen(2, 456)
+        citizen_1 = citizen(1, 123, 1)
+        citizen_2 = citizen(2, 456, 1)
         citizen_1.report_citizen(citizen_2)
         self.assertEqual(citizen_2.get_strikes(), 1)
         citizen_1.report_citizen(citizen_2)

@@ -1,10 +1,11 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 import unittest
 
 class user(ABC):
-    def __init__(self, cuil, cellphone):
+    def __init__(self, cuil, cellphone, password):
         self.cuil = cuil
         self.cellphone = cellphone
+        self.password = password
 
     def report_event(self, type):
         #Debe crear una instancia de la clase 'evento', con un tipo especifico
@@ -12,6 +13,14 @@ class user(ABC):
 
     def get_cuil(self):
         return self.cuil
+
+    def get_password(self):
+        return self.password
+
+    @abstractmethod
+    def launch_user_menu(self):
+        pass
+
 
 class admin(user):
     def ban(self, citizen):
@@ -30,9 +39,12 @@ class admin(user):
         #Debe crear una instancia de la clase 'sensor', con un tipo de evento asignado
         pass
 
+    def launch_user_menu(self): #crea una instancia de la clase admin_menu y lo launchea
+        pass
+
 class citizen(user):
-    def __init__(self, cuil, cellphone):
-        super().__init__(cuil, cellphone)
+    def __init__(self, cuil, cellphone, password):
+        super().__init__(cuil, cellphone, password)
         self.friend_list = []
         self.friend_request_list = []
         self.strikes = 0 #Cantidad de solicitudes rechazadas por otro ciudadanos
@@ -84,6 +96,9 @@ class citizen(user):
     def report_citizen(self, other_citizen):
         # Adds strike al ciudadano reportado
         other_citizen.add_strike()
+
+    def launch_user_menu(self): #crea una instancia de la clase citizen_menu y lo launchea
+        pass
 
 class sensor:
     def __init__(self, event_type):

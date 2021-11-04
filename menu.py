@@ -1,5 +1,5 @@
 from Citizen_record import citizen_record
-
+from utilities import user_searcher, user_validation
 
 class main_menu():
 
@@ -18,8 +18,8 @@ class main_menu():
         while user_input != 'exit':
             user_Cuil = int(input('Enter Cuil: ')) 
             user_password = input('Enter password: ')
-            if citizen_record.validate_login(user_Cuil, user_password): #Hay que implementar el metodo validate_login()
-                __class__.login()
+            if user_validation.validate_login(user_Cuil, user_password): #Hay que implementar el metodo validate_login()
+                __class__.login(user_searcher.search_user(user_Cuil))
                 print('\nReturning to Main Menu...\n')
                 return ' '
             
@@ -34,16 +34,17 @@ class main_menu():
             user_password = input('Enter password: ')
             user_password_validation = input('Enter password again: ')
 
-            if citizen_record.validate_registration(user_Cuil, user_number) and user_password == user_password_validation: #Hay que implementar el metodo validate_registration()
-                __class__.register()
+            if user_validation.validate_registration(user_Cuil, user_number) and user_password == user_password_validation: #Hay que implementar el metodo validate_registration()
+                __class__.register(user_Cuil, user_password, user_number)
                 print('\nReturning to Main Menu...\n')
                 return ' '
             
             print("\n\tSomething went wrong.\n\tBe sure to put your Cuil, phone number and passwords(both times) correctly \n\tIf you want to try again, press enter.\n\tIf you want to leave to the Main Menu, type 'exit'\n")
             user_input = input("Press enter or type 'exit': ")
     
-    def login():
+    def login(user):
         print("\nLogin was succefull!\n")
+        user.action_menu()
 
     def register(user_Cuil, user_password, user_number):
         print("\nRegistration was succefull!")
