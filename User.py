@@ -1,10 +1,11 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 import unittest
 
 class user(ABC):
-    def __init__(self, cuil, cellphone):
+    def __init__(self, cuil, cellphone, password):
         self.cuil = cuil
         self.cellphone = cellphone
+        self.password = password
 
     def report_event(self, type):
         #Debe crear una instancia de la clase 'evento', con un tipo especifico
@@ -12,6 +13,14 @@ class user(ABC):
 
     def get_cuil(self):
         return self.cuil
+
+    def get_password(self):
+        return self.password
+
+    @abstractmethod
+    def launch_user_menu(self):
+        pass
+
 
 class admin(user):
     def ban(self, citizen):
@@ -30,9 +39,12 @@ class admin(user):
         #Debe crear una instancia de la clase 'sensor', con un tipo de evento asignado
         pass
 
+    def launch_user_menu(self): #crea una instancia de la clase admin_menu y lo launchea
+        pass
+
 class citizen(user):
-    def __init__(self, cuil, cellphone):
-        super().__init__(cuil, cellphone)
+    def __init__(self, cuil, cellphone, password):
+        super().__init__(cuil, cellphone, password)
         self.friend_list = []
         self.friend_request_list = []
         self.strikes = 0 #Cantidad de solicitudes rechazadas por otro ciudadanos
@@ -80,6 +92,13 @@ class citizen(user):
 
     def get_unbanned(self):
         self.strikes = 0
+        
+    def report_citizen(self, other_citizen):
+        # Adds strike al ciudadano reportado
+        other_citizen.add_strike()
+
+    def launch_user_menu(self): #crea una instancia de la clase citizen_menu y lo launchea
+        pass
 
 class sensor:
     def __init__(self, event_type):
@@ -89,40 +108,6 @@ class sensor:
         #Debe crear una instancia de la clase 'evento', del tipo que tiene prestablecido el sensor
         pass
 
-
-class test_user(unittest.TestCase):
-
-    def test_send_friend_request(self):
-        citizen_1 = citizen(1, 123)
-        citizen_2 = citizen(2, 456)
-
-        citizen_1.send_friend_request(citizen_2)
-        self.assertEqual(citizen_2.get_friend_requests()[0], citizen_1)
-
-    def test_accept_friend_request(self):
-        citizen_1 = citizen(1, 123)
-        citizen_2 = citizen(2, 456)
-        citizen_3 = citizen(3, 789)
-
-        citizen_1.send_friend_request(citizen_2)
-        citizen_3.send_friend_request(citizen_2)
-
-        citizen_2.accept_friend_request(citizen_3)
-        self.assertEqual(citizen_2.get_friend_list()[0], citizen_3)
-
-    def test_reject_friend_request(self):
-        citizen_1 = citizen(1, 123)
-        citizen_2 = citizen(2, 456)
-        citizen_3 = citizen(3, 789)
-
-        citizen_1.send_friend_request(citizen_2)
-        citizen_3.send_friend_request(citizen_2)
-
-        citizen_2.accept_friend_request(citizen_3)
-        citizen_2.reject_friend_request(citizen_1)
-        self.assertEqual(len(citizen_2.get_friend_requests()), 0)
-        self.assertEqual(citizen_1.get_strikes(), 1)
         
-
 if __name__ == '__main__':
     unittest.main()
