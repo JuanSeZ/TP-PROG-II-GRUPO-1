@@ -1,5 +1,6 @@
 from User import user, citizen,admin,sensor
 import unittest
+from Event_type import event_type
 
 
 class test_user(unittest.TestCase):
@@ -42,6 +43,22 @@ class test_user(unittest.TestCase):
         self.assertEqual(citizen_2.get_strikes(), 1)
         citizen_1.report_citizen(citizen_2)
         self.assertEqual(citizen_2.get_strikes(), 2)
+
+class test_event(unittest.TestCase):
+
+    def test_report_event(self):
+        citizen_1 = citizen(1, 123, 1)
+        Eventos = event_type("xyx")
+        citizen_1.report_event("Concierto", "xy")
+        self.assertEqual(len(Eventos.ocurrence_list), 1)
+
+    def test_report_event_con_dos_ocurrencias(self):
+        citizen_1 = citizen(1, 123, 1)
+        citizen_2 = citizen(2, 456, 1)
+        Eventos = event_type("xyx")
+        citizen_1.report_event("Concierto", "xy")
+        citizen_2.report_event("Concierto", "xy")
+        self.assertEqual(Eventos.ocurrence_list[0], [2, object])
 
 
 if __name__ == '__main__':
