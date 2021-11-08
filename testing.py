@@ -48,17 +48,21 @@ class test_event(unittest.TestCase):
 
     def test_report_event(self):
         citizen_1 = citizen(1, 123, 1)
-        Eventos = event_type("xyx")
-        citizen_1.report_event("Concierto", "xy")
-        self.assertEqual(len(Eventos.ocurrence_list), 1)
+        admin_1 = admin(13, 890, 34)
+        Conciertos = event_type("Concert")
+        admin_1.event_type_list.append(Conciertos)
+        citizen_1.report_event("Concert", "xy")
+        self.assertEqual(len(Conciertos.get_ocurrence_list()), 1)
 
     def test_report_event_con_dos_ocurrencias(self):
         citizen_1 = citizen(1, 123, 1)
         citizen_2 = citizen(2, 456, 1)
-        Eventos = event_type("xyx")
-        citizen_1.report_event("Concierto", "xy")
-        citizen_2.report_event("Concierto", "xy")
-        self.assertEqual(Eventos.ocurrence_list[0], [2, object])
+        admin_1 = admin(13, 890, 34)
+        Conciertos = event_type("Concert")
+        admin_1.event_type_list.append(Conciertos)
+        citizen_1.report_event("Concert", "xy")
+        citizen_2.report_event("Concert", "xy")
+        self.assertEqual(Conciertos.get_ocurrence_list()[0][0], 2)
 
 
 if __name__ == '__main__':

@@ -3,6 +3,8 @@ from abc import ABC, abstractmethod
 from Event import event
 import unittest
 from Event_type import event_type
+
+
 class user(ABC):
     def __init__(self, cuil, cellphone, password):
         self.cuil = cuil
@@ -10,14 +12,14 @@ class user(ABC):
         self.password = password
 
     def report_event(self, type, coordinates):
-        #Debe crear una instancia de la clase 'evento', con un tipo especifico
         New_event = event(type, coordinates)
-        #FALTA VER LO DE LA LISTA EVENT_TYPE EN EL ADMIN
-        for events in event_type.get_ocurrence_list():
-            if events[1].type == type and events[1].coordinates == coordinates:
-                events[0] +=1
-                return True
-        event_type.get_ocurrence_list().append([1, New_event])
+        for events_type in admin.event_type_list:
+            if events_type.description == New_event.type:
+                for events in events_type.get_ocurrence_list():
+                    if events[1].coordinates == coordinates:
+                        events[0] +=1
+                        return True
+                events_type.get_ocurrence_list().append([1, New_event])
 
     def get_cuil(self):
         return self.cuil
@@ -43,7 +45,8 @@ class admin(user):
         citizen.get_unbanned()
 
     def create_event_type(self, type):
-        pass
+        new_event_type = event_type(type)
+        self.event_type_list.append(new_event_type)
 
     def create_sensor(self, type):
         #Debe crear una instancia de la clase 'sensor', con un tipo de evento asignado
