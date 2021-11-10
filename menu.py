@@ -53,9 +53,4 @@ class main_menu():
         new_citizen = citizen(user_Cuil, user_number, user_password)
         citizen_record.register_citizen(new_citizen)
 
-
-fake_citizen = citizen(9432, 145, 'hola')
-fake_citizen_2 = citizen(1, 2, 'chau')
-citizen_record.register_citizen(fake_citizen)
-citizen_record.register_citizen(fake_citizen_2)
 main_menu.launch_main()
