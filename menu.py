@@ -1,5 +1,7 @@
 from Citizen_record import citizen_record
+from User import citizen
 from utilities import user_searcher, user_validation
+
 
 class main_menu():
 
@@ -44,11 +46,16 @@ class main_menu():
     
     def login(user):
         print("\nLogin was succefull!\n")
-        user.action_menu()
+        user.launch_user_menu()
 
     def register(user_Cuil, user_password, user_number):
         print("\nRegistration was succefull!")
-        citizen_record.register_citizen(user_Cuil, user_password, user_number)
+        new_citizen = citizen(user_Cuil, user_number, user_password)
+        citizen_record.register_citizen(new_citizen)
 
 
+fake_citizen = citizen(9432, 145, 'hola')
+fake_citizen_2 = citizen(1, 2, 'chau')
+citizen_record.register_citizen(fake_citizen)
+citizen_record.register_citizen(fake_citizen_2)
 main_menu.launch_main()

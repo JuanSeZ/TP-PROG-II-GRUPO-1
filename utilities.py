@@ -1,5 +1,5 @@
 from Citizen_record import citizen_record
-from ABM import ABM
+from Admin_record import Admin_record
 import csv
 import unittest
 
@@ -10,7 +10,7 @@ class user_searcher:
             if citizen.get_cuil() == user_cuil:
                 return citizen
 
-        for admin in ABM.get_admin_list():
+        for admin in Admin_record.get_admin_list():
             if admin.get_cuil() == user_cuil:
                 return admin
 

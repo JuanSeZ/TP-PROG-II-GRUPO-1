@@ -1,9 +1,8 @@
-from abc import ABC
 from abc import ABC, abstractmethod
 from Event import event
 import unittest
 from Event_type import event_type
-
+from user_menu import citizen_menu
 
 class user(ABC):
     def __init__(self, cuil, cellphone, password):
@@ -31,6 +30,8 @@ class user(ABC):
     def launch_user_menu(self):
         pass
 
+    def __repr__(self):
+        return f'{self.cuil}'
 
 class admin(user):
 
@@ -73,7 +74,7 @@ class citizen(user):
 
     def check_friend_requests(self):
         #Debe devolver(o mostrar por pantalla) la lista de de solicitudes de amistad
-        pass
+        print(self.friend_request_list)
 
     def send_friend_request(self, friend_request_reciever):
         #Debe enviarle una solicitud de amistad a otro ciudadano
@@ -111,7 +112,8 @@ class citizen(user):
         other_citizen.add_strike()
 
     def launch_user_menu(self): #crea una instancia de la clase citizen_menu y lo launchea
-        pass
+        new_citizen_menu = citizen_menu(self)
+        new_citizen_menu.action_menu()
 
 class sensor:
     def __init__(self, event_type):
