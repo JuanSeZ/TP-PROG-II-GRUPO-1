@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from Event import event
 import unittest
 from Event_type import event_type
-from user_menu import citizen_menu
+from user_menu import citizen_menu, admin_menu
 
 class user(ABC):
     def __init__(self, cuil, cellphone, password):
@@ -58,7 +58,8 @@ class admin(user):
         pass
 
     def launch_user_menu(self): #crea una instancia de la clase admin_menu y lo launchea
-        pass
+        new_admin_menu = admin_menu(self)
+        new_admin_menu.action_menu()
 
 class citizen(user):
     def __init__(self, cuil, cellphone, password):
@@ -120,7 +121,10 @@ class citizen(user):
 
     def launch_user_menu(self): #crea una instancia de la clase citizen_menu y lo launchea
         new_citizen_menu = citizen_menu(self)
-        new_citizen_menu.action_menu()
+        if self.strikes >= 5:
+            new_citizen_menu.banned_menu()
+        else:
+            new_citizen_menu.action_menu()
 
 class sensor:
     def __init__(self, event_type):

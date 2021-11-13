@@ -7,5 +7,9 @@ class citizen_record:
         cls.citizen_list.append(new_citizen)
 
     @classmethod
+    def unregister_citizen(cls, citizen):
+        cls.citizen_list.remove(citizen)
+
+    @classmethod
     def get_citizen_list(cls):
         return cls.citizen_list

@@ -1,7 +1,7 @@
-from User import user, citizen,admin,sensor
+from User import user, citizen, admin, sensor
 import unittest
 from Event_type import event_type
-
+from ABM import ABM
 
 class test_user(unittest.TestCase):
 
@@ -63,7 +63,6 @@ class test_event(unittest.TestCase):
         citizen_1.report_event("Concert", "xy")
         citizen_2.report_event("Concert", "xy")
         self.assertEqual(Conciertos.get_ocurrence_list()[0][0], 2)
-
 
 if __name__ == '__main__':
     unittest.main()

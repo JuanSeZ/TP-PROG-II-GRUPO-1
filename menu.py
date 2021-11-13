@@ -1,7 +1,7 @@
 from Citizen_record import citizen_record
 from User import citizen
 from utilities import user_searcher, user_validation
-
+from ABM import ABM
 
 class main_menu():
 
@@ -20,15 +20,15 @@ class main_menu():
         while user_input != 'exit':
             user_Cuil = int(input('Enter Cuil: ')) 
             user_password = input('Enter password: ')
-            if user_validation.validate_login(user_Cuil, user_password): #Hay que implementar el metodo validate_login()
+            if user_validation.validate_login(user_Cuil, user_password):
                 __class__.login(user_searcher.search_user(user_Cuil))
                 print('\nReturning to Main Menu...\n')
                 return ' '
             
             print("\n\tYour Cuil or password were incorrect. \n\tIf you want to try again, press enter.\n\tIf you want to leave to the Main Menu, type 'exit'\n")
             user_input = input("Press enter or type 'exit': ")
-        
-    def enter_register_info():
+
+    def enter_register_info(self):
         user_input = ''
         while user_input != 'exit':
             user_Cuil = int(input('Enter Cuil: '))
@@ -55,4 +55,8 @@ class main_menu():
 
 fake_citizen = citizen(9432, 145, 'hola')
 citizen_record.register_citizen(fake_citizen)
+
+default_admin = citizen(0, 0, 'admin')
+citizen_record.register_citizen(default_admin)
+ABM.promote_citizen(default_admin)
 main_menu.launch_main()
