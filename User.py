@@ -35,7 +35,11 @@ class user(ABC):
 
 class admin(user):
 
-    event_type_list = []
+    event_type_list = [event_type('Robo a mano armada'), event_type('Recital')]
+
+    @classmethod
+    def get_event_type_list(cls):
+        return cls.event_type_list
 
     def ban(self, citizen):
         #Debe prohibir el acceso a su cuenta al ciudadano
@@ -71,6 +75,9 @@ class citizen(user):
 
     def get_strikes(self):
         return self.strikes
+
+    def get_event_type_list(self):
+        return admin.get_event_type_list()
 
     def check_friend_requests(self):
         #Debe devolver(o mostrar por pantalla) la lista de de solicitudes de amistad

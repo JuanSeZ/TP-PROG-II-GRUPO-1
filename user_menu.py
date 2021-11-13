@@ -49,6 +49,26 @@ class citizen_menu(user_menu):
                 self.user.reject_friend_request(other_user)
                 return ''
 
+    def report_menu(self):
+        user_input = ''
+        while user_input != 'exit':
+            print(f'-----------------------------------\n\n\tSelect an event type to report:\n')
+            event_type_list = self.user.get_event_type_list()
+            for type in event_type_list:
+                print(f'\t\t{event_type_list.index(type)} - {type}')
+            user_input = int(input('\nEnter one of the above: '))
+            for type in event_type_list:
+                if user_input == event_type_list.index(type):
+                    new_event_type = type
+                    coord_x = int(input('\n\tEnter x coordinate of the event: '))
+                    coord_y = int(input('\n\tEnter y coordinate of the event: '))
+                    self.user.report_event(new_event_type, (coord_x, coord_y))
+                    print('\n\n\tEvent reported succesfully!')
+                    return ''
+
+
+
+
 class admin_menu(user_menu):
     def action_menu(self):
         pass

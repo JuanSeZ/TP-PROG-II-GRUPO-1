@@ -23,7 +23,7 @@ class user_validation:
             next(reader)
             for row in reader:
                 #La primer parte del if, compara con el cuil, la segunda parte del if, compara con el teléfono.
-                if ("{0}".format(row[2])) == str(Cuil) and ("{0}".format(row[1])) == str(phone_number):
+                if (row[2]) == str(Cuil) and (row[1]) == str(phone_number):
                     return True
                 else:
                     return False
