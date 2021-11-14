@@ -82,8 +82,10 @@ class citizen_menu(user_menu):
             user_input = input(f'Enter one of the above: ')
             if user_input == '1':
                 self.user.accept_friend_request(other_user)
+                return ''
             elif user_input == '2':
                 self.user.reject_friend_request(other_user)
+                return ''
 
 class admin_menu(user_menu):
     def action_menu(self):
