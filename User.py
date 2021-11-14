@@ -64,8 +64,8 @@ class admin(user):
                 admin = citizen(admin.cuil, admin.cellphone)
                 citizen_record.register_citizen(admin)
 
-    def create_event_type(self, type):
-        new_event_type = event_type(type)
+    def create_event_type(self, descritpion):
+        new_event_type = event_type(descritpion)
         self.event_type_list.append(new_event_type)
 
     def create_sensor(self, type):

@@ -122,3 +122,14 @@ class admin_menu(user_menu):
             elif user_input == '2':
                 self.user.demote_citizen(other_user)
                 return ''
+
+    def event_type_menu(self):
+        user_input = ''
+        while user_input != 'exit':
+            print(f"-----------------------------------\n\n\t1- Check Current Types\n\t2- Create New Event Type \n\n(Type 'exit' if you want to return to the login menu)")
+            user_input = input(f'Enter one of the above: ')
+            if user_input == '1':
+                print(f'\n\n{self.user.get_event_type_list()}')
+            elif user_input == '2':
+                type_description = input(f'\n\nEnter a description of the new event type: ')
+                self.user.create_event_type(type_description)
