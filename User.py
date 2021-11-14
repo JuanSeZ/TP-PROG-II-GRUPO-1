@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 from Event import event
-import unittest
 from Event_type import event_type
 from user_menu import citizen_menu, admin_menu
+from Citizen_record import citizen_record
+from Admin_record import Admin_record
 
 class user(ABC):
     def __init__(self, cuil, cellphone, password):
@@ -48,6 +49,20 @@ class admin(user):
     def unban(self, citizen):
         #Debe rehabilitar el acceso a su cuenta al ciudadano
         citizen.get_unbanned()
+
+    def promote_citizen(self, citizen):
+        #Esta funcion promueve al cuidadano a un rango mayor
+        citizen_record.unregister_citizen(citizen)
+        new_admin = admin(citizen.cuil, citizen.cellphone, citizen.password)
+        Admin_record.admin_list.append(new_admin)
+
+    def demote_citizen(self, citizen):
+        #Esta funcion degrada a un cuidadano a un rango menor
+        for admins in Admin_record.admin_list:
+            if admins == admin:
+                Admin_record.admin_list.remove(admin)
+                admin = citizen(admin.cuil, admin.cellphone)
+                citizen_record.register_citizen(admin)
 
     def create_event_type(self, type):
         new_event_type = event_type(type)

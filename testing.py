@@ -1,7 +1,6 @@
 from User import user, citizen, admin, sensor
 import unittest
 from Event_type import event_type
-from ABM import ABM
 
 class test_user(unittest.TestCase):
 

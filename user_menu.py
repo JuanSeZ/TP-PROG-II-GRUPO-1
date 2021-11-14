@@ -58,6 +58,7 @@ class citizen_menu(user_menu):
             elif user_input == '3':
                 other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
                 self.user.send_friend_request(user_searcher.search_user(other_user_cuil))
+                print(f'\n\n\tRequest sent successfully!')
             elif user_input == '4':
                 print(self.user.get_friend_list())
 
@@ -68,10 +69,8 @@ class citizen_menu(user_menu):
             user_input = input(f'Enter one of the above: ')
             if user_input == '1':
                 self.user.accept_friend_request(other_user)
-                return ''
             elif user_input == '2':
                 self.user.reject_friend_request(other_user)
-                return ''
 
 class admin_menu(user_menu):
     def action_menu(self):
@@ -85,3 +84,41 @@ class admin_menu(user_menu):
                 self.report_menu()
             elif user_input == '3':
                 self.event_type_menu()
+
+    def user_manager_menu(self):
+        user_input = ''
+        while user_input != 'exit':
+            print(f"-----------------------------------\n\n\t1- Ban/Unban Citizen\n\t2- Promote/Demote Admin\n\n(Type 'exit' if you want to return to the login menu)")
+            user_input = input(f'Enter one of the above: ')
+            if user_input == '1':
+                other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
+                other_user = user_searcher.search_user(other_user_cuil)
+                self.ban_unban_menu(other_user)
+            elif user_input == '2':
+                other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
+                other_user = user_searcher.search_user(other_user_cuil)
+                self.promote_demote_menu(other_user)
+
+    def ban_unban_menu(self, other_user):
+        user_input = ''
+        while user_input != 'exit':
+            print(f"-----------------------------------\n\n\t1- Ban Citizen\n\t2- Unban Citizen\n\n(Type 'exit' if you want to return to the login menu)")
+            user_input = input(f'Enter one of the above: ')
+            if user_input == '1':
+                self.user.ban(other_user)
+                return ''
+            elif user_input == '2':
+                self.user.unban(other_user)
+                return ''
+
+    def promote_demote_menu(self, other_user):
+        user_input = ''
+        while user_input != 'exit':
+            print(f"-----------------------------------\n\n\t1- Promote User\n\t2- Demote User\n\n(Type 'exit' if you want to return to the login menu)")
+            user_input = input(f'Enter one of the above: ')
+            if user_input == '1':
+                self.user.promote_citizen(other_user)
+                return ''
+            elif user_input == '2':
+                self.user.demote_citizen(other_user)
+                return ''
