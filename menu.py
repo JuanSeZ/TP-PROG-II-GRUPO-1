@@ -18,7 +18,10 @@ class main_menu():
     def enter_login_info():
         user_input = ''
         while user_input != 'exit':
-            user_Cuil = int(input('Enter Cuil: ')) 
+            try:
+                user_Cuil = int(input('Enter Cuil: '))
+            except ValueError:
+                user_Cuil = -1
             user_password = input('Enter password: ')
             if user_validation.validate_login(user_Cuil, user_password):
                 __class__.login(user_searcher.search_user(user_Cuil))
@@ -31,8 +34,12 @@ class main_menu():
     def enter_register_info(self):
         user_input = ''
         while user_input != 'exit':
-            user_Cuil = int(input('Enter Cuil: '))
-            user_number = int(input('Enter phone number: '))
+            try:
+                user_Cuil = int(input('Enter Cuil: '))
+                user_number = int(input('Enter phone number: '))
+            except ValueError:
+                user_Cuil = -1
+                user_number = -1
             user_password = input('Enter password: ')
             user_password_validation = input('Enter password again: ')
 
@@ -55,6 +62,10 @@ class main_menu():
 
 fake_citizen = citizen(9432, 145, 'hola')
 citizen_record.register_citizen(fake_citizen)
+fake_friend = citizen(12, 390, 'chau')
+citizen_record.register_citizen(fake_friend)
+fake_friend.send_friend_request(fake_citizen)
+
 
 default_admin = citizen(0, 0, 'admin')
 citizen_record.register_citizen(default_admin)

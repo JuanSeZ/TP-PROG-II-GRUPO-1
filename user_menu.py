@@ -20,8 +20,13 @@ class user_menu(ABC):
             for type in event_type_list:
                 if user_input == event_type_list.index(type):
                     new_event_type = type
-                    coord_x = int(input('\n\tEnter x coordinate of the event: '))
-                    coord_y = int(input('\n\tEnter y coordinate of the event: '))
+                    try:
+                        coord_x = int(input('\n\tEnter x coordinate of the event: '))
+                        coord_y = int(input('\n\tEnter y coordinate of the event: '))
+                    except ValueError:
+                        print('\n\n\tThere was a problem with the coordinates you entered, make sure to enter integers when you try again')
+                        return ''
+
                     self.user.report_event(new_event_type, (coord_x, coord_y))
                     print('\n\n\tEvent reported succesfully!')
                     return ''
@@ -52,11 +57,19 @@ class citizen_menu(user_menu):
             if user_input == '1':
                 self.user.check_friend_requests()
             elif user_input == '2':
-                other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
+                try:
+                    other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
+                except ValueError:
+                    print('\n\nPlease enter a valid user Cuil!')
+                    break
                 other_user = user_searcher.search_user(other_user_cuil)
                 self.accept_reject_menu(other_user)
             elif user_input == '3':
-                other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
+                try:
+                    other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
+                except ValueError:
+                    print('\n\nPlease enter a valid user Cuil!')
+                    break
                 self.user.send_friend_request(user_searcher.search_user(other_user_cuil))
                 print(f'\n\n\tRequest sent successfully!')
             elif user_input == '4':
@@ -91,11 +104,19 @@ class admin_menu(user_menu):
             print(f"-----------------------------------\n\n\t1- Ban/Unban Citizen\n\t2- Promote/Demote Admin\n\n(Type 'exit' if you want to return to the login menu)")
             user_input = input(f'Enter one of the above: ')
             if user_input == '1':
-                other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
+                try:
+                    other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
+                except ValueError:
+                    print('\n\nPlease enter a valid user Cuil!')
+                    break
                 other_user = user_searcher.search_user(other_user_cuil)
                 self.ban_unban_menu(other_user)
             elif user_input == '2':
-                other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
+                try:
+                    other_user_cuil = int(input(f"\n\n Enter other user's cuil: "))
+                except ValueError:
+                    print('\n\nPlease enter a valid user Cuil!')
+                    break
                 other_user = user_searcher.search_user(other_user_cuil)
                 self.promote_demote_menu(other_user)
 
