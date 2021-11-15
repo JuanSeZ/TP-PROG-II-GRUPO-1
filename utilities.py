@@ -1,4 +1,4 @@
-from Citizen_record import citizen_record
+from Citizen_record import Citizen_record
 from Admin_record import Admin_record
 import csv
 import unittest
@@ -6,7 +6,7 @@ import unittest
 class user_searcher:
     @staticmethod
     def search_user(user_cuil):
-        for citizen in citizen_record.get_citizen_list():
+        for citizen in Citizen_record.get_citizen_list():
             if citizen.get_cuil() == user_cuil:
                 return citizen
 

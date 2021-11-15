@@ -1,9 +1,9 @@
-from Citizen_record import citizen_record
-from User import citizen
+from Citizen_record import Citizen_record
+from User import Citizen
 from utilities import user_searcher, user_validation
 from ABM import ABM
 
-class main_menu():
+class Main_menu():
 
     def launch_main():
         user_input = ''
@@ -57,17 +57,17 @@ class main_menu():
 
     def register(user_Cuil, user_password, user_number):
         print("\nRegistration was succefull!")
-        new_citizen = citizen(user_Cuil, user_number, user_password)
-        citizen_record.register_citizen(new_citizen)
+        new_citizen = Citizen(user_Cuil, user_number, user_password)
+        Citizen_record.register_citizen(new_citizen)
 
-fake_citizen = citizen(9432, 145, 'hola')
-citizen_record.register_citizen(fake_citizen)
-fake_friend = citizen(12, 390, 'chau')
-citizen_record.register_citizen(fake_friend)
+fake_citizen = Citizen(9432, 145, 'hola')
+Citizen_record.register_citizen(fake_citizen)
+fake_friend = Citizen(12, 390, 'chau')
+Citizen_record.register_citizen(fake_friend)
 fake_friend.send_friend_request(fake_citizen)
 
 
-default_admin = citizen(0, 0, 'admin')
-citizen_record.register_citizen(default_admin)
+default_admin = Citizen(0, 0, 'admin')
+Citizen_record.register_citizen(default_admin)
 ABM.promote_citizen(default_admin)
-main_menu.launch_main()
+Main_menu.launch_main()

@@ -1,19 +1,19 @@
 from abc import ABC, abstractmethod
-from Event import event
-from Event_type import event_type
+from Event import Event
+from Event_type import Event_type
 from user_menu import citizen_menu, admin_menu
-from Citizen_record import citizen_record
+from Citizen_record import Citizen_record
 from Admin_record import Admin_record
 
-class user(ABC):
+class User(ABC):
     def __init__(self, cuil, cellphone, password):
         self.cuil = cuil
         self.cellphone = cellphone
         self.password = password
 
     def report_event(self, type, coordinates):
-        New_event = event(type, coordinates)
-        for events_type in admin.event_type_list:
+        New_event = Event(type, coordinates)
+        for events_type in Admin.event_type_list:
             if events_type.description == New_event.type:
                 for events in events_type.get_ocurrence_list():
                     if events[1].coordinates == coordinates:
@@ -34,9 +34,9 @@ class user(ABC):
     def __repr__(self):
         return f'{self.cuil}'
 
-class admin(user):
+class Admin(User):
 
-    event_type_list = [event_type('Robo a mano armada'), event_type('Recital')]
+    event_type_list = [Event_type('Robo a mano armada'), Event_type('Recital')]
 
     @classmethod
     def get_event_type_list(cls):
@@ -52,8 +52,8 @@ class admin(user):
 
     def promote_citizen(self, citizen):
         #Esta funcion promueve al cuidadano a un rango mayor
-        citizen_record.unregister_citizen(citizen)
-        new_admin = admin(citizen.cuil, citizen.cellphone, citizen.password)
+        Citizen_record.unregister_citizen(citizen)
+        new_admin = Admin(citizen.cuil, citizen.cellphone, citizen.password)
         Admin_record.admin_list.append(new_admin)
 
     def demote_citizen(self, citizen):
@@ -62,10 +62,10 @@ class admin(user):
             if admins == admin:
                 Admin_record.admin_list.remove(admin)
                 admin = citizen(admin.cuil, admin.cellphone)
-                citizen_record.register_citizen(admin)
+                Citizen_record.register_citizen(admin)
 
     def create_event_type(self, descritpion):
-        new_event_type = event_type(descritpion)
+        new_event_type = Event_type(descritpion)
         self.event_type_list.append(new_event_type)
 
     def create_sensor(self, type):
@@ -76,7 +76,7 @@ class admin(user):
         new_admin_menu = admin_menu(self)
         new_admin_menu.action_menu()
 
-class citizen(user):
+class Citizen(User):
     def __init__(self, cuil, cellphone, password):
         super().__init__(cuil, cellphone, password)
         self.friend_list = []
@@ -93,7 +93,7 @@ class citizen(user):
         return self.strikes
 
     def get_event_type_list(self):
-        return admin.get_event_type_list()
+        return Admin.get_event_type_list()
 
     def check_friend_requests(self):
         #Debe devolver(o mostrar por pantalla) la lista de de solicitudes de amistad
@@ -141,7 +141,7 @@ class citizen(user):
         else:
             new_citizen_menu.action_menu()
 
-class sensor:
+class Sensor:
     def __init__(self, event_type):
         self.event_type = event_type
     
@@ -150,5 +150,4 @@ class sensor:
         pass
 
         
-if __name__ == '__main__':
-    unittest.main()
+

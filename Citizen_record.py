@@ -1,4 +1,4 @@
-class citizen_record:
+class Citizen_record:
     citizen_list = [] #Lista de ciudadanos registrados
 
     @classmethod
