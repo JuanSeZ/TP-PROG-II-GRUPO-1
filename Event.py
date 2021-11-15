@@ -5,3 +5,6 @@ class Event:
         self.type = type #Debe ser una instancia de la clase 'event_type'
         self.coordinates = coordinates
         self.type.add_ocurrence(self) #Al inicializar el evento, se agrega a la lista de ocurrencias del tipo
+
+    def get_coordinates(self):
+        return self.coordinates

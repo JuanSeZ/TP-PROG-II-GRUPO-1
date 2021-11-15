@@ -7,7 +7,7 @@ class Event_type:
     def __repr__(self):
         return self.description
 
-    def get_ocurrence_list(self):
+    def get_event_list(self):
          return self.event_list
 
 

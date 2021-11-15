@@ -1,12 +1,13 @@
 class Zone:
-    def __init__(self, lower_left_vertex, lower_right_vertex, upper_left_vertex, upper_right_vertex):
-        self.lower_left_vertex = lower_left_vertex
-        self.lower_right_vertex = lower_right_vertex
-        self.upper_left_vertex = upper_left_vertex
-        self.upper_right_vertex = upper_right_vertex
+    def __init__(self, center_of_zone, width):
+        self.center_of_zone = center_of_zone
+        self.width = width
 
-    def is_in_zone(self):
+
+    def is_in_zone(self, event_or_citizen):
         # Verifica si el evento o un ciudadano esta en la zona descripta.
+
+
         pass
 
 
@@ -21,6 +22,7 @@ class RankingInZone:
 
     def update_ranking(self, event):
         # Ordena el ranking en base a la concurrencia
+
         pass
 
     def record_ranking(self):

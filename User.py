@@ -15,11 +15,11 @@ class User(ABC):
         New_event = Event(type, coordinates)
         for events_type in Admin.event_type_list:
             if events_type.description == New_event.type:
-                for events in events_type.get_ocurrence_list():
+                for events in events_type.get_event_list():
                     if events[1].coordinates == coordinates:
-                        events[0] +=1
+                        events[0] += 1
                         return True
-                events_type.get_ocurrence_list().append([1, New_event])
+                events_type.get_event_list().append([1, New_event])
 
     def get_cuil(self):
         return self.cuil
