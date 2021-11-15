@@ -63,5 +63,7 @@ class test_event(unittest.TestCase):
         citizen_2.report_event("Concert", "xy")
         self.assertEqual(Conciertos.get_ocurrence_list()[0][0], 2)
 
+
+
 if __name__ == '__main__':
     unittest.main()
