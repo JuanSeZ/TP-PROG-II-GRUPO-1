@@ -1,15 +1,18 @@
-class Citizen_record:
-    citizen_list = [] #Lista de ciudadanos registrados
+class CitizenRecord:
+    def __init__(self):
+        self.citizen_list = [] #Lista de ciudadanos registrados
 
-    @classmethod
-    def register_citizen(cls, new_citizen):
+
+    def register_citizen(self, new_citizen):
         #Debe agregar un ciudadano a la lista de ciudadanos registrados
-        cls.citizen_list.append(new_citizen)
+        self.citizen_list.append(new_citizen)
 
-    @classmethod
-    def unregister_citizen(cls, citizen):
-        cls.citizen_list.remove(citizen)
 
-    @classmethod
-    def get_citizen_list(cls):
-        return cls.citizen_list
+    def unregister_citizen(self, citizen):
+        self.citizen_list.remove(citizen)
+
+
+    def get_citizen_list(self):
+        return self.citizen_list
+
+Citizen_record = CitizenRecord()

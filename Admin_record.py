@@ -1,6 +1,10 @@
-class Admin_record:
-    admin_list = []
+class AdminRecord:
 
-    @classmethod
-    def get_admin_list(cls):
-        return cls.admin_list
+    def __init__(self):
+        self.admin_list = []
+
+
+    def get_admin_list(self):
+        return self.admin_list
+
+Admin_record = AdminRecord()
