@@ -2,6 +2,8 @@ from Citizen_record import Citizen_record
 from User import Citizen
 from utilities import user_searcher, user_validation
 from ABM import ABM
+from Event_type_record import event_type_record
+from Event_type import Event_type
 
 class MainMenu:
 
@@ -60,16 +62,23 @@ class MainMenu:
         new_citizen = Citizen(user_Cuil, user_number, user_password)
         Citizen_record.register_citizen(new_citizen)
 
-
+#Prueba Menu
 fake_citizen = Citizen(9432, 145, 'hola')
 Citizen_record.register_citizen(fake_citizen)
 fake_friend = Citizen(12, 390, 'chau')
 Citizen_record.register_citizen(fake_friend)
 fake_friend.send_friend_request(fake_citizen)
 
+robo = Event_type('Robo')
+recital = Event_type('Recital')
+event_type_record.add_event_type(robo)
+event_type_record.add_event_type(recital)
 
+#Se crea un admin por default
 default_admin = Citizen(0, 0, 'admin')
 Citizen_record.register_citizen(default_admin)
 ABM.promote_citizen(default_admin)
+
+#Se instancia e inicia el menu
 Main_menu = MainMenu()
 Main_menu.launch_main()

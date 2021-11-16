@@ -4,6 +4,7 @@ from Event_type import Event_type
 from user_menu import citizen_menu, admin_menu
 from Citizen_record import Citizen_record
 from Admin_record import Admin_record
+from Event_type_record import event_type_record
 
 class User(ABC):
     def __init__(self, cuil, cellphone, password):
@@ -13,13 +14,13 @@ class User(ABC):
 
     def report_event(self, type, coordinates):
         New_event = Event(type, coordinates)
-        for events_type in Admin.event_type_list:
+        for events_type in event_type_record.get_event_types():
             if events_type.description == New_event.type:
-                for events in events_type.get_event_list():
-                    if events[1].coordinates == coordinates:
-                        events[0] += 1
+                for event in events_type.get_event_list():
+                    if event.coordinates == coordinates:
+                        event.concurrance += 1
                         return True
-                events_type.get_event_list().append([1, New_event])
+                events_type.get_event_list().append(New_event)
 
     def get_cuil(self):
         return self.cuil
@@ -36,11 +37,11 @@ class User(ABC):
 
 class Admin(User):
 
-    event_type_list = [Event_type('Robo a mano armada'), Event_type('Recital')]
+    #event_type_list = [Event_type('Robo a mano armada'), Event_type('Recital')]
 
     @classmethod
-    def get_event_type_list(cls):
-        return cls.event_type_list
+    def get_event_type_list(self):
+        return event_type_record.get_event_types()
 
     def ban(self, citizen):
         #Debe prohibir el acceso a su cuenta al ciudadano
@@ -66,7 +67,7 @@ class Admin(User):
 
     def create_event_type(self, descritpion):
         new_event_type = Event_type(descritpion)
-        self.event_type_list.append(new_event_type)
+        event_type_record.add_event_type(new_event_type)
 
     def create_sensor(self, type):
         #Debe crear una instancia de la clase 'sensor', con un tipo de evento asignado

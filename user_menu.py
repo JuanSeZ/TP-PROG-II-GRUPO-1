@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from utilities import user_searcher
+from map import map
 
 class user_menu(ABC):
     def __init__(self, user):
@@ -31,16 +32,23 @@ class user_menu(ABC):
                     print('\n\n\tEvent reported succesfully!')
                     return ''
 
+    def event_map_menu(self):
+        print('\n\tOpening map...\n')
+        map.build_map()
+
+
 class citizen_menu(user_menu):
     def action_menu(self):
         user_input = ''
         while user_input != 'exit':
-            print(f"-----------------------------------\n\n\t1- Manage Friends\n\t2- Report Event\n\n(Type 'exit' if you want to return to the login menu)")
+            print(f"-----------------------------------\n\n\t1- Manage Friends\n\t2- Report Event\n\t3- Events info\n\n(Type 'exit' if you want to return to the login menu)")
             user_input = input(f'Enter one of the above: ')
             if user_input == '1':
                 self.friend_menu()
             elif user_input == '2':
                 self.report_menu()
+            elif user_input == '3':
+                self.monitoring_menu()
 
     def banned_menu(self):
         user_input = ''
@@ -86,6 +94,17 @@ class citizen_menu(user_menu):
             elif user_input == '2':
                 self.user.reject_friend_request(other_user)
                 return ''
+
+    def monitoring_menu(self):
+        user_input = ''
+        while user_input != 'exit':
+            print(f"-----------------------------------\n\n\t1- Event map\n\t2- Top Events in my Zone\n\n(Type 'exit' if you want to return)")
+            user_input = input(f'Enter one of the above: ')
+            if user_input == '1':
+                self.event_map_menu()
+            elif user_input == '2':
+                pass
+
 
 class admin_menu(user_menu):
     def action_menu(self):

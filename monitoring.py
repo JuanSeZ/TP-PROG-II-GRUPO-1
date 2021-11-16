@@ -1,10 +1,6 @@
-from Citizen_record import Citizen_record
-from User import Citizen, Admin
-from utilities import user_searcher, user_validation
-from ABM import ABM
-import math
-from Event import Event
-from Event_type import Event_type
+from Event_type_record import event_type_record
+# from Event import Event
+# from Event_type import Event_type
 
 class Zone:
     def __init__(self, origin_of_zone, width, description):
@@ -30,17 +26,15 @@ class Zone:
 class RankingInZone:
     def __init__(self, zone):
         self.zone = zone
-        self.ranking = []
-
 
     def get_ranking(self):
         # Ordena el ranking en base a la concurrencia
         ranking_in_zone = []
-        for event_type in Admin.get_event_type_list():
+        for event_type in event_type_record.get_event_types():
             for event in event_type.get_event_list():
                 if self.zone.is_in_zone(event):
                     ranking_in_zone.append(event)
-        ranking_in_zone.sort(reverse=True)
+        ranking_in_zone.sort(key=lambda event:event.concurrence, reverse=True)
         return ranking_in_zone
 
 
@@ -60,11 +54,8 @@ Tigre = Zone((0, 10), 10, "Tigre")
 San_Isidro = Zone((10, 0), 10, "San Isidro")
 Escobar = Zone((10, 10), 10, "Escobar")
 
-#Prueba Mapa
-Concerts = Event_type("Concert")
-Concierto = Event(Concerts, (2, 2))
-Robo = Event_type("Robo")
-Entradera = Event(Robo, (2,4))
-Ranking_In_Zone = RankingInZone(Pilar)
-Ranking_In_Zone.ranking = [[25, Concierto], [1, Entradera]]
+rankingInPilar = RankingInZone(Pilar)
+rankingInTigre = RankingInZone(Tigre)
+rankingInSanIsidro = RankingInZone(San_Isidro)
+rankingInEscobar = RankingInZone(Escobar)
 
