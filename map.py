@@ -13,11 +13,11 @@ class Map:
             for event in Ranking_In_Zone.ranking:
                 x = event[1].get_coordinates()[0]
                 y = event[1].get_coordinates()[1]
-                ax.scatter(x,y, linewidth=event[0])
+                ax.scatter(x,y, linewidth=event[0], color="red")
                 plt.text(x, y + 0.5, event[1].get_type(), fontsize = 10, horizontalalignment='center', verticalalignment='center')
             origin_point = zone.get_center_of_point()
             widht = zone.get_width()
-            plt.text(zone.get_center_of_point()[0], zone.get_center_of_point()[1], "Tigre",)
+            plt.text(zone.get_center_of_point()[0], zone.get_center_of_point()[1], zone.get_descprition())
             ax.add_patch(
                 patches.Rectangle(
                     xy=origin_point,

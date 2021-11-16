@@ -7,10 +7,10 @@ from Event import Event
 from Event_type import Event_type
 
 class Zone:
-    def __init__(self, origin_of_zone, width):
+    def __init__(self, origin_of_zone, width, description):
         self.origin_of_zone = origin_of_zone
         self.width = width
-
+        self.description = description
 
     def is_in_zone(self, event_or_citizen):
         # Verifica si el evento o un ciudadano esta en la zona descripta.
@@ -21,6 +21,10 @@ class Zone:
 
     def get_width(self):
         return self.width
+
+    def get_descprition(self):
+        return self.description
+
 
 
 class RankingInZone:
@@ -51,12 +55,16 @@ class ZoneRecord:
     def __init__(self):
         self.zones = []
 
-Pilar = Zone((0,0), 10)
-Tigre = Zone((0, 10), 10)
-San_Isidro = Zone((10, 0), 10)
-Escobar = Zone((10, 10), 10)
+Pilar = Zone((0,0), 10, "Pilar")
+Tigre = Zone((0, 10), 10, "Tigre")
+San_Isidro = Zone((10, 0), 10, "San Isidro")
+Escobar = Zone((10, 10), 10, "Escobar")
+
+#Prueba Mapa
 Concerts = Event_type("Concert")
 Concierto = Event(Concerts, (2, 2))
+Robo = Event_type("Robo")
+Entradera = Event(Robo, (2,4))
 Ranking_In_Zone = RankingInZone(Pilar)
-Ranking_In_Zone.ranking = [[10, Concierto]]
+Ranking_In_Zone.ranking = [[25, Concierto], [1, Entradera]]
 
