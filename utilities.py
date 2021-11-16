@@ -25,8 +25,7 @@ class user_validation:
                 #La primer parte del if, compara con el cuil, la segunda parte del if, compara con el teléfono.
                 if (row[2]) == str(Cuil) and (row[1]) == str(phone_number):
                     return True
-                else:
-                    return False
+            return False
 
     def validate_login(user_cuil, user_password):
         #Debe ver si los datos ingresados concuerdan con algun ciudadano de citizen_list[]

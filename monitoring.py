@@ -59,3 +59,4 @@ rankingInTigre = RankingInZone(Tigre)
 rankingInSanIsidro = RankingInZone(San_Isidro)
 rankingInEscobar = RankingInZone(Escobar)
 
+ranking_list = [rankingInPilar, rankingInEscobar, rankingInSanIsidro, rankingInTigre]

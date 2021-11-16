@@ -5,6 +5,8 @@ from user_menu import citizen_menu, admin_menu
 from Citizen_record import Citizen_record
 from Admin_record import Admin_record
 from Event_type_record import event_type_record
+import csv
+from monitoring import ranking_list
 
 class User(ABC):
     def __init__(self, cuil, cellphone, password):
@@ -15,10 +17,10 @@ class User(ABC):
     def report_event(self, type, coordinates):
         New_event = Event(type, coordinates)
         for events_type in event_type_record.get_event_types():
-            if events_type.description == New_event.type:
+            if events_type == New_event.type:
                 for event in events_type.get_event_list():
                     if event.coordinates == coordinates:
-                        event.concurrance += 1
+                        event.concurrence += 1
                         return True
                 events_type.get_event_list().append(New_event)
 
@@ -36,8 +38,6 @@ class User(ABC):
         return f'{self.cuil}'
 
 class Admin(User):
-
-    #event_type_list = [Event_type('Robo a mano armada'), Event_type('Recital')]
 
     @classmethod
     def get_event_type_list(self):
@@ -96,6 +96,14 @@ class Citizen(User):
     def get_event_type_list(self):
         return Admin.get_event_type_list()
 
+    def get_zone(self):
+        with open("Dataset.csv") as f:
+            reader = csv.reader(f)
+            next(reader)
+            for row in reader:
+                if int((row[2])) == self.cuil:
+                        return row[3]
+
     def check_friend_requests(self):
         #Debe devolver(o mostrar por pantalla) la lista de de solicitudes de amistad
         print(self.friend_request_list)
@@ -142,10 +150,16 @@ class Citizen(User):
         else:
             new_citizen_menu.action_menu()
 
+    def get_event_ranking(self):
+        for ranking in ranking_list:
+            if ranking.zone.description == self.get_zone():
+                return ranking.get_ranking()
+
 class Sensor:
-    def __init__(self, event_type):
+    def __init__(self, event_type, coordinates):
         self.event_type = event_type
-    
+        self.coordinates = coordinates
+
     def report_event(self):
         #Debe crear una instancia de la clase 'evento', del tipo que tiene prestablecido el sensor
         pass

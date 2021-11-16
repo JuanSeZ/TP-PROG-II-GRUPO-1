@@ -1,6 +1,5 @@
-from monitoring import rankingInPilar, rankingInEscobar, rankingInSanIsidro, rankingInTigre
+from monitoring import ranking_list
 
-ranking_list = [rankingInPilar, rankingInEscobar, rankingInSanIsidro, rankingInTigre]
 import pip
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -32,4 +31,4 @@ class Map:
 
 
 map = Map()
-map.build_map()
+#map.build_map()

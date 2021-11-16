@@ -103,8 +103,12 @@ class citizen_menu(user_menu):
             if user_input == '1':
                 self.event_map_menu()
             elif user_input == '2':
-                pass
+                self.ranking_menu()
 
+    def ranking_menu(self):
+        print()
+        for event in self.user.get_event_ranking():
+            print(f'Event: {event.type} Concurrence: {event.concurrence} Location: {event.coordinates}')
 
 class admin_menu(user_menu):
     def action_menu(self):
