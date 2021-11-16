@@ -8,3 +8,6 @@ class Event:
 
     def get_coordinates(self):
         return self.coordinates
+
+    def get_type(self):
+        return self.type
