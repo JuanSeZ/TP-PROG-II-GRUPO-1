@@ -179,3 +179,23 @@ class admin_menu(user_menu):
             elif user_input == '2':
                 type_description = input(f'\n\nEnter a description of the new event type: ')
                 self.user.create_event_type(type_description)
+
+
+
+class SensorMenu(user_menu):
+
+    def action_menu(self):
+        user_input = ''
+        while user_input != 'exit':
+            print(f"-----------------------------------\n\n\t1- Report Event\n\n(Type 'exit' if you want to return to the login menu)")
+            user_input = input('Enter one of the above: ')
+            if user_input == '1':
+                self.report_menu()
+
+    def report_menu(self):
+        self.user.report_event()
+        print('\n\n\tEvent reported succesfully!')
+
+
+
+

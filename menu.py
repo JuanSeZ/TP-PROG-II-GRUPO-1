@@ -1,21 +1,50 @@
 from Citizen_record import Citizen_record
-from User import Citizen
+from User import Citizen, Sensor
 from utilities import user_searcher, user_validation
 from ABM import ABM
 from Event_type_record import event_type_record
 from Event_type import Event_type
+from sensor_record import sensor_record
+
 
 class MainMenu:
 
     def launch_main(self):
         user_input = ''
         while user_input != 'exit':
-            print(f"-----------------------------------\n\n\t1- Login\n\t2- Register\n\n(Type 'exit' if you want to close the program)")
+            print(f"-----------------------------------\n\n\t1- Log in\n\t2- Register\n\n(Type 'exit' if you want to close the program)")
             user_input = input(f'Enter one of the above: ')
+            if user_input == '1':
+                self.sensor_or_user_menu()
+            elif user_input == '2':
+                self.enter_register_info()
+
+    def sensor_or_user_menu(self):
+        user_input = ''
+        while user_input != 'exit':
+            print(f"-----------------------------------\n\n\t1- Log in as User\n\t2- Log in as Sensor\n\n(Type 'exit' if you want to go back)")
+            user_input = input('Enter one of the above: ')
             if user_input == '1':
                 self.enter_login_info()
             elif user_input == '2':
-                self.enter_register_info()
+                self.sensor_login()
+
+    def sensor_login(self):
+        user_input = ''
+        sensors = sensor_record.get_sensors()
+        for sensor in sensors:
+            print(f'\n\t{sensors.index(sensor)} - Type: {sensor.get_type()} Coordinates: {sensor.get_coordinates()}')
+        print('')
+        user_input = int(input('Choose one of the above: '))
+        for sensor in sensors:
+            if user_input == sensors.index(sensor):
+                sensor.launch_user_menu()
+
+
+
+
+
+
 
     def enter_login_info(self):
         user_input = ''
@@ -32,6 +61,7 @@ class MainMenu:
             
             print("\n\tYour Cuil or password were incorrect. \n\tIf you want to try again, press enter.\n\tIf you want to leave to the Main Menu, type 'exit'\n")
             user_input = input("Press enter or type 'exit': ")
+
 
     def enter_register_info(self):
         user_input = ''
@@ -63,6 +93,7 @@ class MainMenu:
         Citizen_record.register_citizen(new_citizen)
 
 #Prueba Menu
+
 fake_citizen = Citizen(9432, 145, 'hola')
 Citizen_record.register_citizen(fake_citizen)
 fake_friend = Citizen(12, 390, 'chau')
@@ -73,7 +104,8 @@ robo = Event_type('Robo')
 recital = Event_type('Recital')
 event_type_record.add_event_type(robo)
 event_type_record.add_event_type(recital)
-
+new_sensor = Sensor(robo, (1, 1))
+sensor_record.add_sensor(new_sensor)
 #Se crea un admin por default
 default_admin = Citizen(0, 0, 'admin')
 Citizen_record.register_citizen(default_admin)

@@ -1,12 +1,13 @@
 from abc import ABC, abstractmethod
 from Event import Event
 from Event_type import Event_type
-from user_menu import citizen_menu, admin_menu
+from user_menu import citizen_menu, admin_menu, SensorMenu
 from Citizen_record import Citizen_record
 from Admin_record import Admin_record
 from Event_type_record import event_type_record
 import csv
 from monitoring import ranking_list
+from sensor_record import sensor_record
 
 class User(ABC):
     def __init__(self, cuil, cellphone, password):
@@ -34,14 +35,15 @@ class User(ABC):
     def launch_user_menu(self):
         pass
 
+
+    def get_event_type_list(self):
+        return event_type_record.get_event_types()
+
     def __repr__(self):
         return f'{self.cuil}'
 
 class Admin(User):
 
-    @classmethod
-    def get_event_type_list(self):
-        return event_type_record.get_event_types()
 
     def ban(self, citizen):
         #Debe prohibir el acceso a su cuenta al ciudadano
@@ -58,7 +60,7 @@ class Admin(User):
         Admin_record.admin_list.append(new_admin)
 
     def demote_citizen(self, citizen):
-        #Esta funcion degrada a un cuidadano a un rango menor
+        # Esta funcion degrada a un cuidadano a un rango menor
         for admins in Admin_record.admin_list:
             if admins == admin:
                 Admin_record.admin_list.remove(admin)
@@ -69,20 +71,26 @@ class Admin(User):
         new_event_type = Event_type(descritpion)
         event_type_record.add_event_type(new_event_type)
 
-    def create_sensor(self, type):
-        #Debe crear una instancia de la clase 'sensor', con un tipo de evento asignado
-        pass
+    def create_sensor(self, type, coordinates):
+        # Debe crear una instancia de la clase 'sensor', con un tipo de evento asignado
+        sensor = Sensor(type, coordinates)
+        sensor_record.add_sensor(sensor)
+
+
+
 
     def launch_user_menu(self): #crea una instancia de la clase admin_menu y lo launchea
         new_admin_menu = admin_menu(self)
         new_admin_menu.action_menu()
+
+
 
 class Citizen(User):
     def __init__(self, cuil, cellphone, password):
         super().__init__(cuil, cellphone, password)
         self.friend_list = []
         self.friend_request_list = []
-        self.strikes = 0 #Cantidad de solicitudes rechazadas por otro ciudadanos
+        self.strikes = 0 # Cantidad de solicitudes rechazadas por otro ciudadanos
 
     def get_friend_requests(self):
         return self.friend_request_list
@@ -93,8 +101,6 @@ class Citizen(User):
     def get_strikes(self):
         return self.strikes
 
-    def get_event_type_list(self):
-        return Admin.get_event_type_list()
 
     def get_zone(self):
         with open("Dataset.csv") as f:
@@ -155,14 +161,26 @@ class Citizen(User):
             if ranking.zone.description == self.get_zone():
                 return ranking.get_ranking()
 
-class Sensor:
+class Sensor(User):
     def __init__(self, event_type, coordinates):
+        super().__init__(None, None, None)
+
         self.event_type = event_type
         self.coordinates = coordinates
 
     def report_event(self):
         # Debe crear una instancia de la clase 'evento', del tipo que tiene prestablecido el sensor
-        super(Sensor, self).report_event(self.event_type, self.coordinates)
+        super().report_event(self.event_type, self.coordinates)
+
+    def get_type(self):
+        return self.event_type
+
+    def get_coordinates(self):
+        return self.coordinates
+
+    def launch_user_menu(self):
+        sensor_menu = SensorMenu(self)
+        sensor_menu.action_menu()
 
 
         
