@@ -161,8 +161,9 @@ class Sensor:
         self.coordinates = coordinates
 
     def report_event(self):
-        #Debe crear una instancia de la clase 'evento', del tipo que tiene prestablecido el sensor
-        pass
+        # Debe crear una instancia de la clase 'evento', del tipo que tiene prestablecido el sensor
+        super(Sensor, self).report_event(self.event_type, self.coordinates)
+
 
         
 
