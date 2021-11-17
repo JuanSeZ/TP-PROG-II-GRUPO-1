@@ -37,6 +37,21 @@ class user_menu(ABC):
                     print('\n\n\tEvent reported succesfully!')
                     return (new_event_type, (coord_x, coord_y))
 
+    def monitoring_menu(self):
+        user_input = ''
+        while user_input != 'exit':
+            print(f"-----------------------------------\n\n\t1- Event map\n\t2- Event Ranking in my zone\n\n(Type 'exit' if you want to return)")
+            user_input = input(f'Enter one of the above: ')
+            if user_input == '1':
+                self.event_map_menu()
+            elif user_input == '2':
+                self.ranking_menu()
+
+    def ranking_menu(self):
+        print()
+        for event in self.user.get_event_ranking():
+            print(f'Event: {event.type} Concurrence: {event.concurrence} Location: {event.coordinates}')
+
     def event_map_menu(self):
         print('\n\tOpening map...\n')
         map.build_map()
@@ -115,26 +130,11 @@ class citizen_menu(user_menu):
                 self.user.reject_friend_request(other_user)
                 return ''
 
-    def monitoring_menu(self):
-        user_input = ''
-        while user_input != 'exit':
-            print(f"-----------------------------------\n\n\t1- Event map\n\t2- Top Events in my Zone\n\n(Type 'exit' if you want to return)")
-            user_input = input(f'Enter one of the above: ')
-            if user_input == '1':
-                self.event_map_menu()
-            elif user_input == '2':
-                self.ranking_menu()
-
-    def ranking_menu(self):
-        print()
-        for event in self.user.get_event_ranking():
-            print(f'Event: {event.type} Concurrence: {event.concurrence} Location: {event.coordinates}')
-
 class admin_menu(user_menu):
     def action_menu(self):
         user_input = ''
         while user_input != 'exit':
-            print(f"-----------------------------------\n\n\t1- Manage Users\n\t2- Report Event\n\t3- Create Event Type\n\n(Type 'exit' if you want to return to the login menu)")
+            print(f"-----------------------------------\n\n\t1- Manage Users\n\t2- Report Event\n\t3- Create Event Type\n\t4- Events info\n\n(Type 'exit' if you want to return to the login menu)")
             user_input = input(f'Enter one of the above: ')
             if user_input == '1':
                 self.user_manager_menu()
@@ -142,6 +142,8 @@ class admin_menu(user_menu):
                 self.report_menu()
             elif user_input == '3':
                 self.event_type_menu()
+            elif user_input == '4':
+                self.monitoring_menu()
 
     def user_manager_menu(self):
         user_input = ''

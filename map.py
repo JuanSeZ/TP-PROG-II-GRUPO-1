@@ -31,4 +31,3 @@ class Map:
 
 
 map = Map()
-#map.build_map()

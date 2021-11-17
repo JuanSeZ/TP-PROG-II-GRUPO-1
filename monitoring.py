@@ -37,6 +37,14 @@ class RankingInZone:
         ranking_in_zone.sort(key=lambda event:event.concurrence, reverse=True)
         return ranking_in_zone
 
+class GeneralRanking:
+    def get_ranking(self):
+        ranking = []
+        for event_type in event_type_record.get_event_types():
+            for event in event_type.get_event_list():
+                ranking.append(event)
+        ranking.sort(key=lambda event:event.concurrence, reverse=True)
+        return ranking
 
 
 
@@ -60,3 +68,5 @@ rankingInSanIsidro = RankingInZone(San_Isidro)
 rankingInEscobar = RankingInZone(Escobar)
 
 ranking_list = [rankingInPilar, rankingInEscobar, rankingInSanIsidro, rankingInTigre]
+
+general_ranking = GeneralRanking()

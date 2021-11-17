@@ -6,7 +6,7 @@ from Citizen_record import Citizen_record
 from Admin_record import Admin_record
 from Event_type_record import event_type_record
 import csv
-from monitoring import ranking_list
+from monitoring import ranking_list, general_ranking
 from sensor_record import sensor_record
 
 class User(ABC):
@@ -76,13 +76,12 @@ class Admin(User):
         sensor = Sensor(type, coordinates)
         sensor_record.add_sensor(sensor)
 
-
-
-
     def launch_user_menu(self): #crea una instancia de la clase admin_menu y lo launchea
         new_admin_menu = admin_menu(self)
         new_admin_menu.action_menu()
 
+    def get_event_ranking(self):
+        return general_ranking.get_ranking()
 
 
 class Citizen(User):
