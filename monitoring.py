@@ -1,5 +1,7 @@
+import csv
+
 from Event_type_record import event_type_record
-# from Event import Event
+from Event import Event
 # from Event_type import Event_type
 
 class Zone:
@@ -48,9 +50,25 @@ class GeneralRanking:
 
 
 
-    def record_ranking(self):
-        # Pasarlo a un archivo el ranking
-        pass
+    def add_user_to_csv(self):
+        with open("Users.csv", "a") as r:
+            writer = csv.writer(r)
+            for citizen in self.citizen_list:
+                writer.writerow([citizen.cuil, citizen.cellphone, citizen.password])
+
+    def import_ranking(self):
+        with open("Eventos.csv") as f:
+            reader = csv.reader(f)
+            next(reader)
+        for row in reader:
+            evento = Event(row[0], row[1])
+            evento.concurrence = row[2]
+            for event_type in event_type_record:
+                if event_type == evento.get_type():
+                    event_type.get_event_list().append(evento)
+
+
+
 
 
 class ZoneRecord:

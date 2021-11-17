@@ -1,3 +1,5 @@
+import csv
+
 from Citizen_record import Citizen_record
 from User import Citizen, Sensor
 from utilities import user_searcher, user_validation
@@ -90,7 +92,13 @@ class MainMenu:
     def register(self, user_Cuil, user_password, user_number):
         print("\nRegistration was succefull!")
         new_citizen = Citizen(user_Cuil, user_number, user_password)
+        Citizen_record.add_user_to_csv()
         Citizen_record.register_citizen(new_citizen)
+
+
+
+
+
 
 #Prueba Menu
 

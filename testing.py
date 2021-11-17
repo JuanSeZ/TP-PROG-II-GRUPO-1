@@ -1,9 +1,9 @@
 from User import User, Citizen, Admin, Sensor
 import unittest
 from Event_type import Event_type
-from monitoring import Zone, RankingInZone
+from monitoring import Zone, RankingInZone, Pilar
 from Event import Event
-
+from Event_type_record import event_type_record, EventTypeRecord
 # class test_user(unittest.TestCase):
 
 #     def test_send_friend_request(self):
@@ -76,9 +76,19 @@ class test_event(unittest.TestCase):
         self.assertEqual(new_zone.is_in_zone(event1), True)
 
 
-
-
-
+    def test_get_ranking(self):
+        citizen_1 = Citizen(1, 123, 1)
+        citizen_2 = Citizen(2, 456, 1)
+        Concert = Event_type("Concert")
+        Robo = Event_type("Robo")
+        rankingInPilar = RankingInZone(Pilar)
+        eventos = EventTypeRecord()
+        eventos.add_event_type(Concert)
+        eventos.add_event_type(Robo)
+        citizen_1.report_event(Concert, (1, 1))
+        citizen_2.report_event(Robo, (1, 2))
+        citizen_2.report_event(Concert, (1, 1))
+        self.assertEqual(len(rankingInPilar.get_ranking()), 2)
 
 
 

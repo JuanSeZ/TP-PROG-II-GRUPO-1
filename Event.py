@@ -11,3 +11,6 @@ class Event:
 
     def get_type(self):
         return self.type
+
+    def get_concurrence(self):
+        return self.concurrence
