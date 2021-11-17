@@ -40,7 +40,15 @@ class User(ABC):
         return event_type_record.get_event_types()
 
     def __repr__(self):
-        return f'{self.cuil}'
+        return f'{self.get_name()} (Cuil: {self.cuil})'
+
+    def get_name(self):
+        with open("Dataset.csv") as f:
+            reader = csv.reader(f)
+            next(reader)
+            for row in reader:
+                if int((row[2])) == self.cuil:
+                        return row[0]
 
 class Admin(User):
 
