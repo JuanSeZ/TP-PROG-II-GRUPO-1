@@ -16,6 +16,7 @@ class user_searcher:
 
 class user_validation:
 
+    @staticmethod
     def validate_registration(Cuil, phone_number):
         #Debe ver si los datos ingresados concuerdan con datos en el Dataset de Anses
         with open("Dataset.csv") as f:
@@ -27,6 +28,7 @@ class user_validation:
                     return True
             return False
 
+    @staticmethod
     def validate_login(user_cuil, user_password):
         #Debe ver si los datos ingresados concuerdan con algun ciudadano de citizen_list[]
         user = user_searcher.search_user(user_cuil)
