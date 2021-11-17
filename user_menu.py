@@ -134,7 +134,7 @@ class admin_menu(user_menu):
     def action_menu(self):
         user_input = ''
         while user_input != 'exit':
-            print(f"-----------------------------------\n\n\t1- Manage Users\n\t2- Report Event\n\t3- Create Event Type\n\t4- Events info\n\n(Type 'exit' if you want to return to the login menu)")
+            print(f"-----------------------------------\n\n\t1- Manage Users\n\t2- Report Event\n\t3- Create Event Type\n\t4- Events info\n\t5- Create Sensor\n\n(Type 'exit' if you want to return to the login menu)")
             user_input = input(f'Enter one of the above: ')
             if user_input == '1':
                 self.user_manager_menu()
@@ -144,6 +144,8 @@ class admin_menu(user_menu):
                 self.event_type_menu()
             elif user_input == '4':
                 self.monitoring_menu()
+            elif user_input == '5':
+                self.create_sensor_menu()
 
     def user_manager_menu(self):
         user_input = ''
@@ -202,7 +204,30 @@ class admin_menu(user_menu):
                 type_description = input(f'\n\nEnter a description of the new event type: ')
                 self.user.create_event_type(type_description)
 
+    def create_sensor_menu(self):
+        user_input = ''
+        while user_input != 'exit':
+            print(f'-----------------------------------\n\n\tSelect an event type to report:\n')
+            event_type_list = self.user.get_event_type_list()
+            for type in event_type_list:
+                print(f'\t\t{event_type_list.index(type)} - {type}')
+            try:
+                user_input = int(input('\nEnter one of the above: '))
+            except ValueError:
+                print(f'\n\tYour input is not valid!\n\tPlease enter the number next to the event type you want to report\n')
+                user_input = input(f"\nIf you want to cancel your report, enter 'exit'. If you want to try again, press enter: ")
 
+            for type in event_type_list:
+                if user_input == event_type_list.index(type):
+                    new_event_type = type
+                    try:
+                        coord_x = int(input('\n\tEnter x coordinate of the event: '))
+                        coord_y = int(input('\n\tEnter y coordinate of the event: '))
+                    except ValueError:
+                        print('\n\n\tThere was a problem with the coordinates you entered, make sure to enter integers when you try again')
+                        return ''
+
+                    self.user.create_sensor(new_event_type, coord_x, coord_y)
 
 class SensorMenu(user_menu):
 

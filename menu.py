@@ -7,6 +7,7 @@ from ABM import ABM
 from Event_type_record import event_type_record
 from Event_type import Event_type
 from sensor_record import sensor_record
+from monitoring import general_ranking
 
 
 class MainMenu:
@@ -92,7 +93,6 @@ class MainMenu:
     def register(self, user_Cuil, user_password, user_number):
         print("\nRegistration was succefull!")
         new_citizen = Citizen(user_Cuil, user_number, user_password)
-        Citizen_record.add_user_to_csv()
         Citizen_record.register_citizen(new_citizen)
 
 
@@ -108,17 +108,20 @@ fake_friend = Citizen(12, 390, 'chau')
 Citizen_record.register_citizen(fake_friend)
 fake_friend.send_friend_request(fake_citizen)
 
-robo = Event_type('Robo')
-recital = Event_type('Recital')
-event_type_record.add_event_type(robo)
-event_type_record.add_event_type(recital)
-new_sensor = Sensor(robo, (1, 1))
-sensor_record.add_sensor(new_sensor)
+#robo = Event_type('Robo')
+#recital = Event_type('Recital')
+#event_type_record.add_event_type(robo)
+#event_type_record.add_event_type(recital)
+#new_sensor = Sensor(robo, (1, 1))
+#sensor_record.add_sensor(new_sensor)
 #Se crea un admin por default
 default_admin = Citizen(0, 0, 'admin')
 Citizen_record.register_citizen(default_admin)
 ABM.promote_citizen(default_admin)
 
 #Se instancia e inicia el menu
+general_ranking.import_ranking()
 Main_menu = MainMenu()
 Main_menu.launch_main()
+general_ranking.record_ranking()
+

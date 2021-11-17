@@ -91,6 +91,9 @@ class Admin(User):
     def get_event_ranking(self):
         return general_ranking.get_ranking()
 
+    def create_sensor(self, type, coord_x, coord_y):
+        new_sensor = Sensor(type, (coord_x, coord_y))
+        sensor_record.add_sensor(new_sensor)
 
 class Citizen(User):
     def __init__(self, cuil, cellphone, password):

@@ -2,7 +2,7 @@ import csv
 
 from Event_type_record import event_type_record
 from Event import Event
-# from Event_type import Event_type
+from Event_type import Event_type
 
 class Zone:
     def __init__(self, origin_of_zone, width, description):
@@ -48,28 +48,43 @@ class GeneralRanking:
         ranking.sort(key=lambda event:event.concurrence, reverse=True)
         return ranking
 
-
-
-    def add_user_to_csv(self):
-        with open("Users.csv", "a") as r:
+    def record_ranking(self):
+        with open("Eventos.csv", "w") as r:
             writer = csv.writer(r)
-            for citizen in self.citizen_list:
-                writer.writerow([citizen.cuil, citizen.cellphone, citizen.password])
+            writer.writerow(['Tipo de Evento', 'coordenadas', 'concurrencia'])
+            for event in self.get_ranking():
+                writer.writerow([event.get_type(), event.get_coordinates(), event.get_concurrence()])
+
+        self.record_event_types()
 
     def import_ranking(self):
+        self.import_types()
         with open("Eventos.csv") as f:
             reader = csv.reader(f)
             next(reader)
-        for row in reader:
-            evento = Event(row[0], row[1])
-            evento.concurrence = row[2]
-            for event_type in event_type_record:
-                if event_type == evento.get_type():
-                    event_type.get_event_list().append(evento)
+            for row in reader:
+                for type in event_type_record.get_event_types():
+                    if len(row) != 0:
+                        if row[0] == type.description:
+                            event = Event(type, (int(row[1][1]), int(row[1][4])))
+                            event.concurrence = int(row[2])
+                            type.add_ocurrence(event)
 
+    def record_event_types(self):
+        with open("Tipos_de_evento.csv", "w") as r:
+            writer = csv.writer(r)
+            writer.writerow(['Descripcion'])
+            for type in event_type_record.get_event_types():
+                writer.writerow([type.description])
 
-
-
+    def import_types(self):
+        with open("Tipos_de_evento.csv") as f:
+            reader = csv.reader(f)
+            next(reader)
+            for row in reader:
+                if len(row) != 0:
+                    event_type = Event_type(row[0])
+                    event_type_record.add_event_type(event_type)
 
 class ZoneRecord:
     def __init__(self):
