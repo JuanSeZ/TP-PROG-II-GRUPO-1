@@ -17,7 +17,12 @@ class user_menu(ABC):
             event_type_list = self.user.get_event_type_list()
             for type in event_type_list:
                 print(f'\t\t{event_type_list.index(type)} - {type}')
-            user_input = int(input('\nEnter one of the above: '))
+            try:
+                user_input = int(input('\nEnter one of the above: '))
+            except ValueError:
+                print(f'\n\tYour input is not valid!\n\tPlease enter the number next to the event type you want to report\n')
+                user_input = input(f"\nIf you want to cancel your report, enter 'exit'. If you want to try again, press enter: ")
+
             for type in event_type_list:
                 if user_input == event_type_list.index(type):
                     new_event_type = type
