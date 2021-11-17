@@ -35,7 +35,7 @@ class user_menu(ABC):
 
                     self.user.report_event(new_event_type, (coord_x, coord_y))
                     print('\n\n\tEvent reported succesfully!')
-                    return ''
+                    return (new_event_type, (coord_x, coord_y))
 
     def event_map_menu(self):
         print('\n\tOpening map...\n')
@@ -61,6 +61,21 @@ class citizen_menu(user_menu):
             print(f"-----------------------------------\n\n\tYou were banned from our platform due to breaking our policy rules\n\tYou can send a complaint to review your case at admin_mail@gmail.com\n\n(Type 'exit' if you want to return to the login menu)")
             user_input = input(f'Enter one of the above: ')
 
+    def report_menu(self):
+        event_info = super().report_menu()
+        user_input = ''
+        while user_input != 'exit':
+            print(f"\n\tIs any of your friends participating in this event?")
+            print(f'\n\t Friends: {self.user.get_friend_list()}')
+            print(f"\n\n(Type 'exit' if you want to finish")
+            user_input = (input(f'Enter their cuil: '))
+            try:
+                friend_cuil = int(user_input)
+            except ValueError:
+                pass
+            if user_input != 'exit':
+                friend = user_searcher.search_user(friend_cuil)
+                friend.report_event(event_info[0], event_info[1])
     
     def friend_menu(self):
         user_input = ''
