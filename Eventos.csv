@@ -1,6 +1,3 @@
-Tipo de Evento,coordenadas,concurrencia
-Robo,"(1, 1)",2
-Robo,"(1, 5)",2
-Robo,"(5, 5)",1
-Recital,"(3, 3)",1
-Recital,"(8, 8)",1
+Tipo de Evento,coordenada x,coordenada y,concurrencia
+Robo,3,3,1
+Recital,15,15,1

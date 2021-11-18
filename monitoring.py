@@ -51,9 +51,9 @@ class GeneralRanking:
     def record_ranking(self):
         with open("Eventos.csv", "w") as r:
             writer = csv.writer(r)
-            writer.writerow(['Tipo de Evento', 'coordenadas', 'concurrencia'])
+            writer.writerow(['Tipo de Evento', 'coordenada x', 'coordenada y', 'concurrencia'])
             for event in self.get_ranking():
-                writer.writerow([event.get_type(), event.get_coordinates(), event.get_concurrence()])
+                writer.writerow([event.get_type(), event.get_coordinates()[0], event.get_coordinates()[1], event.get_concurrence()])
 
         self.record_event_types()
 
@@ -66,8 +66,8 @@ class GeneralRanking:
                 for type in event_type_record.get_event_types():
                     if len(row) != 0:
                         if row[0] == type.description:
-                            event = Event(type, (int(row[1][1]), int(row[1][4])))
-                            event.concurrence = int(row[2])
+                            event = Event(type, (int(row[1]), int(row[2])))
+                            event.concurrence = int(row[3])
                             type.add_ocurrence(event)
 
     def record_event_types(self):

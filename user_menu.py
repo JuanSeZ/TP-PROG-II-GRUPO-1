@@ -221,8 +221,8 @@ class admin_menu(user_menu):
                 if user_input == event_type_list.index(type):
                     new_event_type = type
                     try:
-                        coord_x = int(input('\n\tEnter x coordinate of the event: '))
-                        coord_y = int(input('\n\tEnter y coordinate of the event: '))
+                        coord_x = int(input('\n\tEnter x coordinate of the sensor: '))
+                        coord_y = int(input('\n\tEnter y coordinate of the sensor: '))
                     except ValueError:
                         print('\n\n\tThere was a problem with the coordinates you entered, make sure to enter integers when you try again')
                         return ''

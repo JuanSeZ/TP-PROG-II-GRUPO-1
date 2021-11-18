@@ -1,14 +1,15 @@
 import csv
 
 from Citizen_record import Citizen_record
-from User import Citizen, Sensor
+from User import Citizen, Sensor, Admin
+from Admin_record import Admin_record
 from utilities import user_searcher, user_validation
 from ABM import ABM
 from Event_type_record import event_type_record
 from Event_type import Event_type
 from sensor_record import sensor_record
 from monitoring import general_ranking
-from save_data import Save_data
+from save_data import save_data
 
 class MainMenu:
 
@@ -21,7 +22,6 @@ class MainMenu:
                 self.sensor_or_user_menu()
             elif user_input == '2':
                 self.enter_register_info()
-        Save_data.save()
 
     def sensor_or_user_menu(self):
         user_input = ''
@@ -39,7 +39,11 @@ class MainMenu:
         for sensor in sensors:
             print(f'\n\t{sensors.index(sensor)} - Type: {sensor.get_type()} Coordinates: {sensor.get_coordinates()}')
         print('')
-        user_input = int(input('Choose one of the above: '))
+        try:
+            user_input = int(input('Choose one of the above: '))
+        except ValueError:
+            print(f'\n\tYour input is not valid!')
+            return ''
         for sensor in sensors:
             if user_input == sensors.index(sensor):
                 sensor.launch_user_menu()
@@ -92,31 +96,20 @@ class MainMenu:
         new_citizen = Citizen(user_Cuil, user_number, user_password)
         Citizen_record.register_citizen(new_citizen)
 
+#Crea un admin por default
+default_admin = Admin(0, 0, 'admin')
+Admin_record.add_default_admin(default_admin)
 
-
-
-#Prueba Menu
-
-#fake_citizen = Citizen(9432, 145, 'hola')
-#Citizen_record.register_citizen(fake_citizen)
-#fake_friend = Citizen(12, 390, 'chau')
-#Citizen_record.register_citizen(fake_friend)
-#fake_friend.send_friend_request(fake_citizen)
-
-#robo = Event_type('Robo')
-#recital = Event_type('Recital')
-#event_type_record.add_event_type(robo)
-#event_type_record.add_event_type(recital)
-#new_sensor = Sensor(robo, (1, 1))
-#sensor_record.add_sensor(new_sensor)
-#Se crea un admin por default
-default_admin = Citizen(0, 0, 'admin')
-Citizen_record.register_citizen(default_admin)
-ABM.promote_citizen(default_admin)
+#Se vuelven a crear los eventos, tipos de eventos y usuarios
+general_ranking.import_ranking()
+save_data.import_data()
 
 #Se instancia e inicia el menu
-general_ranking.import_ranking()
 Main_menu = MainMenu()
 Main_menu.launch_main()
+
+#Se guardan los eventos, tipos de eventos y los usuarios
 general_ranking.record_ranking()
+save_data.save()
+
 
