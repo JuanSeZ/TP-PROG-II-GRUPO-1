@@ -8,8 +8,7 @@ from Event_type_record import event_type_record
 from Event_type import Event_type
 from sensor_record import sensor_record
 from monitoring import general_ranking
-from save_data import save
-
+from save_data import Save_data
 
 class MainMenu:
 
@@ -22,7 +21,7 @@ class MainMenu:
                 self.sensor_or_user_menu()
             elif user_input == '2':
                 self.enter_register_info()
-        save()
+        Save_data.save()
 
     def sensor_or_user_menu(self):
         user_input = ''
@@ -92,8 +91,6 @@ class MainMenu:
         print("\nRegistration was succefull!")
         new_citizen = Citizen(user_Cuil, user_number, user_password)
         Citizen_record.register_citizen(new_citizen)
-
-
 
 
 
