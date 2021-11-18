@@ -8,6 +8,7 @@ from Event_type_record import event_type_record
 import csv
 from monitoring import ranking_list, general_ranking
 from sensor_record import sensor_record
+from utilities import user_searcher
 
 class User(ABC):
     def __init__(self, cuil, cellphone, password):
@@ -50,22 +51,27 @@ class User(ABC):
                 if int((row[2])) == self.cuil:
                         return row[0]
 
+
+
 class Admin(User):
 
 
     def ban(self, citizen):
-        #Debe prohibir el acceso a su cuenta al ciudadano
+        # Debe prohibir el acceso a su cuenta al ciudadano
         citizen.get_banned()
 
     def unban(self, citizen):
-        #Debe rehabilitar el acceso a su cuenta al ciudadano
+        # Debe rehabilitar el acceso a su cuenta al ciudadano
         citizen.get_unbanned()
 
     def promote_citizen(self, citizen):
-        #Esta funcion promueve al cuidadano a un rango mayor
-        Citizen_record.unregister_citizen(citizen)
-        new_admin = Admin(citizen.cuil, citizen.cellphone, citizen.password)
-        Admin_record.admin_list.append(new_admin)
+        # Esta funcion promueve al cuidadano a un rango mayor
+        if user_searcher.exists_admin(citizen):
+            Citizen_record.unregister_citizen(citizen)
+            new_admin = Admin(citizen.cuil, citizen.cellphone, citizen.password)
+            Admin_record.admin_list.append(new_admin)
+            return True
+        return False
 
     def demote_citizen(self, admin):
         # Esta funcion degrada a un cuidadano a un rango menor

@@ -3,7 +3,7 @@ from Admin_record import Admin_record
 import csv
 import unittest
 
-class user_searcher:
+class UserSearcher:
     @staticmethod
     def search_user(user_cuil):
         for citizen in Citizen_record.get_citizen_list():
@@ -13,8 +13,14 @@ class user_searcher:
         for admin in Admin_record.get_admin_list():
             if admin.get_cuil() == user_cuil:
                 return admin
+    @staticmethod
+    def exists_admin(admin_1):
+        for admin in Admin_record.get_admin_list():
+            if admin_1.get_cuil() == admin.get_cuil():
+                return True
+        return False
 
-class user_validation:
+class UserValidation:
 
     @staticmethod
     def validate_registration(Cuil, phone_number):
@@ -41,11 +47,8 @@ class user_validation:
         except AttributeError:
             return False
 
-class test_user(unittest.TestCase):
 
-    def test_validate_data_set(self):
-        x = user_validation.validate_registration(9432, 145)
-        self.assertEqual(x, True)
 
-if __name__ == '__main__':
-    unittest.main()
+user_searcher = UserSearcher()
+user_validation = UserValidation()
+
