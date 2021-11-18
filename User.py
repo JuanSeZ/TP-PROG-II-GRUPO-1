@@ -36,7 +36,6 @@ class User(ABC):
     def launch_user_menu(self):
         pass
 
-
     def get_event_type_list(self):
         return event_type_record.get_event_types()
 
@@ -87,11 +86,6 @@ class Admin(User):
         new_event_type = Event_type(descritpion)
         event_type_record.add_event_type(new_event_type)
 
-    def create_sensor(self, type, coordinates):
-        # Debe crear una instancia de la clase 'sensor', con un tipo de evento asignado
-        sensor = Sensor(type, coordinates)
-        sensor_record.add_sensor(sensor)
-
     def launch_user_menu(self): #crea una instancia de la clase admin_menu y lo launchea
         new_admin_menu = admin_menu(self)
         new_admin_menu.action_menu()
@@ -100,6 +94,7 @@ class Admin(User):
         return general_ranking.get_ranking()
 
     def create_sensor(self, type, coord_x, coord_y):
+        # Debe crear una instancia de la clase 'sensor', con un tipo de evento asignado
         new_sensor = Sensor(type, (coord_x, coord_y))
         sensor_record.add_sensor(new_sensor)
 
