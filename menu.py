@@ -4,9 +4,6 @@ from Citizen_record import Citizen_record
 from User import Citizen, Sensor, Admin
 from Admin_record import Admin_record
 from utilities import user_searcher, user_validation
-from ABM import ABM
-from Event_type_record import event_type_record
-from Event_type import Event_type
 from sensor_record import sensor_record
 from monitoring import general_ranking
 from save_data import save_data
@@ -107,6 +104,9 @@ save_data.import_data()
 #Se instancia e inicia el menu
 Main_menu = MainMenu()
 Main_menu.launch_main()
+
+#Se borra al admin para que no se guarde
+Admin_record.remove_default_admin(default_admin)
 
 #Se guardan los eventos, tipos de eventos y los usuarios
 general_ranking.record_ranking()

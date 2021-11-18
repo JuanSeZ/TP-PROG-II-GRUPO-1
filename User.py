@@ -67,12 +67,12 @@ class Admin(User):
         new_admin = Admin(citizen.cuil, citizen.cellphone, citizen.password)
         Admin_record.admin_list.append(new_admin)
 
-    def demote_citizen(self, citizen):
+    def demote_citizen(self, admin):
         # Esta funcion degrada a un cuidadano a un rango menor
         for admins in Admin_record.admin_list:
             if admins == admin:
                 Admin_record.admin_list.remove(admin)
-                admin = citizen(admin.cuil, admin.cellphone)
+                admin = Citizen(admin.cuil, admin.cellphone, admin.password)
                 Citizen_record.register_citizen(admin)
 
     def create_event_type(self, descritpion):

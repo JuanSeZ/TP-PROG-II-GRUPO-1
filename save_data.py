@@ -3,7 +3,6 @@ from Citizen_record import Citizen_record
 from Admin_record import Admin_record
 from sensor_record import sensor_record
 from Event_type_record import event_type_record
-
 from User import Citizen, Admin, Sensor
 
 class SaveData:
@@ -20,16 +19,11 @@ class SaveData:
 
     def save_citizens(self):
         #Guarda registros de ciudadanos
-        with open('registered_citizens.csv', 'r') as f:
-            reader = csv.reader(f, delimiter=',')
-            with open("registered_citizens.csv", "a") as a:
-                writer = csv.writer(a)
-                for citizen in Citizen_record.citizen_list:
-                    for row in reader:
-                        for col in row:
-                            if col == str(citizen.cuil):
-                                return
-                    writer.writerow([citizen.cuil, citizen.cellphone, citizen.password, citizen.get_strikes()])
+        with open("registered_citizens.csv", "w") as r:
+            writer = csv.writer(r)
+            writer.writerow(['Cuil', 'cellphone', 'password', 'strikes'])
+            for citizen in Citizen_record.get_citizen_list():
+                writer.writerow([citizen.get_cuil(), citizen.cellphone, citizen.password, citizen.get_strikes()])
 
     def import_citizens(self):
         with open("registered_citizens.csv") as f:
@@ -41,6 +35,13 @@ class SaveData:
                     citizen.strikes = int(row[3])
                     Citizen_record.register_citizen(citizen)
 
+        with open("registered_admins.csv") as f:
+            reader = csv.reader(f)
+            next(reader)
+            for row in reader:
+                if len(row) != 0:
+                    citizen = Citizen(int(row[0]), int(row[1]), row[2])
+                    Citizen_record.register_citizen(citizen)
 
     def save_admins(self):
         with open("registered_admins.csv", "w") as r:
