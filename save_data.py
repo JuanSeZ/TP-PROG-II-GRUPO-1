@@ -1,3 +1,4 @@
+import csv
 def save():
     # Guarda registros de ciudadanos
     with open('registered_citizen.csv', 'r') as f:
