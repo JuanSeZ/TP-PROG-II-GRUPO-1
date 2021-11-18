@@ -8,6 +8,7 @@ from Event_type_record import event_type_record
 from Event_type import Event_type
 from sensor_record import sensor_record
 from monitoring import general_ranking
+from save_data import save
 
 
 class MainMenu:
@@ -21,6 +22,7 @@ class MainMenu:
                 self.sensor_or_user_menu()
             elif user_input == '2':
                 self.enter_register_info()
+        save()
 
     def sensor_or_user_menu(self):
         user_input = ''
@@ -42,10 +44,6 @@ class MainMenu:
         for sensor in sensors:
             if user_input == sensors.index(sensor):
                 sensor.launch_user_menu()
-
-
-
-
 
 
 
@@ -102,11 +100,11 @@ class MainMenu:
 
 #Prueba Menu
 
-fake_citizen = Citizen(9432, 145, 'hola')
-Citizen_record.register_citizen(fake_citizen)
-fake_friend = Citizen(12, 390, 'chau')
-Citizen_record.register_citizen(fake_friend)
-fake_friend.send_friend_request(fake_citizen)
+#fake_citizen = Citizen(9432, 145, 'hola')
+#Citizen_record.register_citizen(fake_citizen)
+#fake_friend = Citizen(12, 390, 'chau')
+#Citizen_record.register_citizen(fake_friend)
+#fake_friend.send_friend_request(fake_citizen)
 
 #robo = Event_type('Robo')
 #recital = Event_type('Recital')

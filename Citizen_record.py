@@ -16,11 +16,6 @@ class CitizenRecord:
     def get_citizen_list(self):
         return self.citizen_list
 
-    def add_user_to_csv(self):
-        with open("Users.csv", "a") as r:
-            writer = csv.writer(r)
-            for citizen in self.citizen_list:
-                writer.writerow([citizen.cuil, citizen.cellphone, citizen.password])
 
 
 
