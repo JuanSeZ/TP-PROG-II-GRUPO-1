@@ -7,7 +7,7 @@ class user_menu(ABC):
         self.user = user
 
     @abstractmethod
-    def action_menu(self): # Despliega la lista de acciones posibles y ejecuta metodos segun el input de usuario
+    def action_menu(self): #Despliega la lista de acciones posibles y ejecuta metodos segun el input de usuario
         pass
 
     def report_menu(self):
@@ -188,12 +188,15 @@ class admin_menu(user_menu):
             user_input = input(f'Enter one of the above: ')
             if user_input == '1':
                 if self.user.promote_citizen(other_user):
-                    print('Promoted succesfully!')
+                    print('\nPromoted succesfully!')
                 else:
-                    print('User not found :( ')
+                    print('\nUser not found :( ')
                 return ''
             elif user_input == '2':
-                self.user.demote_citizen(other_user)
+                if self.user.demote_citizen(other_user):
+                    print('\nDemoted succesfully!')
+                else:
+                    print('\nUser not found :( ')
                 return ''
 
     def event_type_menu(self):

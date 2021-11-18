@@ -67,11 +67,11 @@ class Admin(User):
     def promote_citizen(self, citizen):
         # Esta funcion promueve al cuidadano a un rango mayor
         if user_searcher.exists_admin(citizen):
-            Citizen_record.unregister_citizen(citizen)
-            new_admin = Admin(citizen.cuil, citizen.cellphone, citizen.password)
-            Admin_record.admin_list.append(new_admin)
-            return True
-        return False
+            return False
+        Citizen_record.unregister_citizen(citizen)
+        new_admin = Admin(citizen.cuil, citizen.cellphone, citizen.password)
+        Admin_record.admin_list.append(new_admin)
+        return True
 
     def demote_citizen(self, admin):
         # Esta funcion degrada a un cuidadano a un rango menor
@@ -80,6 +80,8 @@ class Admin(User):
                 Admin_record.admin_list.remove(admin)
                 admin = Citizen(admin.cuil, admin.cellphone, admin.password)
                 Citizen_record.register_citizen(admin)
+                return True
+        return False
 
     def create_event_type(self, descritpion):
         new_event_type = Event_type(descritpion)
