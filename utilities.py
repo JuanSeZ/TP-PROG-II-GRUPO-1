@@ -1,7 +1,6 @@
 from Citizen_record import Citizen_record
 from Admin_record import Admin_record
 import csv
-import unittest
 
 class UserSearcher:
     @staticmethod

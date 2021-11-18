@@ -1,5 +1,4 @@
 import csv
-
 from Event_type_record import event_type_record
 from Event import Event
 from Event_type import Event_type

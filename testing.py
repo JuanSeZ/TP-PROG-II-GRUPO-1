@@ -1,4 +1,4 @@
-from User import User, Citizen, Admin, Sensor
+from User import Citizen, Admin, Sensor
 import unittest
 from Event_type import Event_type
 from monitoring import Zone, RankingInZone, Pilar

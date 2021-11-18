@@ -1,4 +1,3 @@
-import csv
 class CitizenRecord:
     def __init__(self):
         self.citizen_list = [] #Lista de ciudadanos registrados

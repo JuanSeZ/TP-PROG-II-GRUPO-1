@@ -1,7 +1,7 @@
 import csv
 
 from Citizen_record import Citizen_record
-from User import Citizen, Sensor, Admin
+from User import Citizen, Admin
 from Admin_record import Admin_record
 from utilities import user_searcher, user_validation
 from sensor_record import sensor_record

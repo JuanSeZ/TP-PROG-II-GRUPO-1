@@ -1,5 +1,3 @@
-from Event_type import Event_type
-
 class Event:
     def __init__(self, type, coordinates):
         self.type = type #Debe ser una instancia de la clase 'event_type'
