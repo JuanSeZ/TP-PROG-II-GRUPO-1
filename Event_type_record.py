@@ -1,6 +1,6 @@
 class EventTypeRecord:
     def __init__(self):
-        self.event_types = []# ["Robo", "Concierto"]
+        self.event_types = []
 
     def get_event_types(self):
         return self.event_types
